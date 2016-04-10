@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 /*
 -//  1) Новый экран вывода данных
@@ -487,10 +488,35 @@ namespace Calculator
                     case "engen":
                     default:
                         //Вычисление на обычной или инженерной панели
-                        List<Token> RPN1 = Arithmetic.GetRPN(inpstr);
-                        result = Convert.ToString(Arithmetic.Calculate(ref RPN1, gradusmode));
-                        result = PostProcess(Convert.ToDouble(result));
-                        if(RPN1!=null) RPN1.Clear();
+                        string sinpstr = "sin(3.1415926535/4)*2/0.64*exp(7)";
+                        for (int iii = 0; iii < 20; iii++)
+                        {
+                            double sr = 0;
+                            string nstr = sinpstr;
+                            for (int jjj = 0; jjj<iii; jjj++)
+                            {
+                                nstr += "+" + sinpstr;
+                            }
+                            for (int kkk = 0; kkk < 7; kkk++)
+                            {
+                                PreProcess(ref nstr);
+                                Stopwatch sw = new Stopwatch();
+                                sw.Start();
+
+                                List<Token> RPN1 = Arithmetic.GetRPN(nstr);
+                                result = Convert.ToString(Arithmetic.Calculate(ref RPN1, gradusmode));
+                                result = PostProcess(Convert.ToDouble(result));
+
+                                sw.Stop();
+                                TimeSpan ts = sw.Elapsed;
+                                sr += ts.TotalMilliseconds;
+                                HistoryBox1.AppendText("\r\n" + ts.ToString());
+                            }
+                            HistoryBox1.AppendText("\r\n" + (sr / 7).ToString() + "\r\n");
+                        }
+                        
+                        //HistoryBox1.AppendText("\r\n" + ts.ToString());
+                        //if(RPN1!=null) RPN1.Clear();
                         break;
                     case "prog":
                         //Вычисление на програмной панели

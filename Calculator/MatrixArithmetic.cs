@@ -10,6 +10,7 @@ namespace Calculator
     /// Доступны операции: +, -, *, /, OPR(), T(), ^.
     /// Возможно до 14 разных матриц в выражении.
     /// </summary>
+    /// asdasdasdasd
     static class MatrixArithmetic
     {
         #region Основные функции

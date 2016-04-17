@@ -489,7 +489,7 @@ namespace Calculator
                     default:
                         //Вычисление на обычной или инженерной панели
                         string sinpstr = "sin(3.1415926535/4)*2/0.64*exp(7)";
-                        for (int iii = 0; iii < 20; iii++)
+                        for (int iii = 0; iii < 200; iii++)
                         {
                             double sr = 0;
                             string nstr = sinpstr;
@@ -508,11 +508,11 @@ namespace Calculator
                                 result = PostProcess(Convert.ToDouble(result));
 
                                 sw.Stop();
-                                TimeSpan ts = sw.Elapsed;
-                                sr += ts.TotalMilliseconds;
+                                int ts = sw.Elapsed.Milliseconds ;
+                                sr += ts;
                                 HistoryBox1.AppendText("\r\n" + ts.ToString());
                             }
-                            HistoryBox1.AppendText("\r\n" + (sr / 7).ToString() + "\r\n");
+                            HistoryBox1.AppendText((sr / 7).ToString() + " ");
                         }
                         
                         //HistoryBox1.AppendText("\r\n" + ts.ToString());

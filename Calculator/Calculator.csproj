@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
@@ -93,6 +94,21 @@
     </Compile>
     <Compile Include="Token.cs" />
     <Compile Include="TokenType.cs" />
+    <Compile Include="WolframAPI\WolframAlphaAssumption.cs" />
+    <Compile Include="WolframAPI\WolframAlphaEngine.cs" />
+    <Compile Include="WolframAPI\WolframAlphaImage.cs" />
+    <Compile Include="WolframAPI\WolframAlphaPod.cs" />
+    <Compile Include="WolframAPI\WolframAlphaQuery.cs" />
+    <Compile Include="WolframAPI\WolframAlphaQueryFormat.cs" />
+    <Compile Include="WolframAPI\WolframAlphaQueryResult.cs" />
+    <Compile Include="WolframAPI\WolframAlphaSubPod.cs" />
+    <Compile Include="WolframAPI\WolframAlphaValidationResult.cs" />
+    <Compile Include="WolframAPI\WolframResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WolframAPI\WolframResult.Designer.cs">
+      <DependentUpon>WolframResult.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="HistoryTile.resx">
       <DependentUpon>HistoryTile.cs</DependentUpon>
     </EmbeddedResource>
@@ -134,9 +150,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="img.ico" />
+    <None Include="Resources\wa.png" />
     <None Include="Resources\prop.png" />
     <None Include="Resources\help.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

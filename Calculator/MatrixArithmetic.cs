@@ -768,6 +768,89 @@ namespace Calculator
 
         #endregion
 
+        #region Для WolframAPI
+        /// <summary>
+        /// Составляет строку из строковой матрицы, используя синтаксис WolframAlpha
+        /// </summary>
+        /// <param name="matrix">Матрица для преобразования</param>
+        /// <returns>Полученная строка</returns>
+        private static string WARetLine(string[,] matrix)
+        {
+            string result = "{";
+
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                string str = "{" + matrix[i, 0];
+                for (int j = 1; j < matrix.GetLength(1); j++)
+                {
+                    str += "," + matrix[i, j];
+                }
+                result += str + "},";
+            }
+
+            return result.Substring(0, result.Length - 1) + "}";
+        }
+
+        /// <summary>
+        /// Преобразование синтаксиса выражения в синтаксис WolframAlpha
+        /// </summary>
+        /// <param name="expression">Выражение для преобразования</param>
+        /// <returns>Возвращает true, если завершилось успешно</returns>
+        public static bool WAConvertExpression(ref string expression)
+        {
+            if (CheckBrackets(ref expression))
+            {
+                Dictionary<string, string> variables = new Dictionary<string, string>();
+                char smb = 'A';
+                string expression_copy = expression;
+                int fpos = -1;
+                int spos = -1;
+
+                for (int i = 0; i < expression.Length; i++)
+                {
+                    if (expression[i] == '{')
+                    {
+                        if (fpos != -1) return false;
+                        else fpos = i;
+                    }
+
+                    if (expression[i] == '}')
+                    {
+                        if (fpos == -1) return false;
+                        else spos = i;
+                    }
+
+                    if (fpos != -1 && spos != -1)
+                    {
+                        if (smb <= 'N')
+                        {
+                            string elem = expression.Substring(fpos + 1, spos - fpos - 1);
+                            if (expression_copy.Contains(elem))
+                            {
+                                expression_copy = expression_copy.Replace("{" + elem + "}", smb.ToString());
+                                variables[smb.ToString()] = "{" + elem + "}";
+                                smb++;
+                            }
+                            fpos = -1; spos = -1;
+                        }
+                        else return false;
+                    }
+                }
+
+                //Перенос данных с конвертацией синтаксиса обратно в строку
+                for (int k = 0; k < variables.Count; k++)
+                {
+                    string WASyntaxStr = WARetLine(RetMatrix(variables.ElementAt(k).Value));
+                    expression_copy = expression_copy.Replace(variables.ElementAt(k).Key, WASyntaxStr);
+                }
+                expression = expression_copy;
+                return true;
+            }
+            else return false;
+        }
+
+        #endregion
+
         /*private static string[,] GetMinor(string[,] matrix, int n)
         {
            string[,] result = new string[matrix.GetLength(0) - 1, matrix.GetLength(0) - 1];

@@ -967,20 +967,20 @@
             // 
             this.toolStripModeSwitch.CheckOnClick = true;
             this.toolStripModeSwitch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripModeSwitch.Enabled = false;
             this.toolStripModeSwitch.Name = "toolStripModeSwitch";
             this.toolStripModeSwitch.Size = new System.Drawing.Size(191, 22);
             this.toolStripModeSwitch.Text = "Автоотключение ALT";
+            this.toolStripModeSwitch.CheckStateChanged += new System.EventHandler(this.toolStripModeSwitch_CheckStateChanged);
             // 
             // toolStripSettings
             // 
             this.toolStripSettings.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripSettings.Enabled = false;
             this.toolStripSettings.Image = global::Calculator.Properties.Resources.prop;
             this.toolStripSettings.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripSettings.Name = "toolStripSettings";
             this.toolStripSettings.Size = new System.Drawing.Size(23, 22);
             this.toolStripSettings.Text = "Настройки";
+            this.toolStripSettings.Click += new System.EventHandler(this.toolStripSettings_Click);
             // 
             // toolStripHelp
             // 
@@ -2359,6 +2359,7 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Calculator - MrMouse";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.panelGrad.ResumeLayout(false);
             this.panelGrad.PerformLayout();
             this.panelModes.ResumeLayout(false);

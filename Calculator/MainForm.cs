@@ -27,9 +27,35 @@ namespace Calculator
         public MainForm()
         {
             InitializeComponent();
+            LoadSettings();
             ChangeModeTo(panelmode);
             ChangeSSTo(SSmode);
             ChangeGradusTo(gradusmode);
+        }
+
+        private void LoadSettings()
+        {
+            switch (Properties.Settings.Default.StartPanel)
+            {
+                case 0:
+                default:
+                    panelmode = "norm";
+                    break;
+                case 1:
+                    panelmode = "engen";
+                    break;
+                case 2:
+                    panelmode = "prog";
+                    break;
+                case 3:
+                    panelmode = "matr";
+                    break;
+                case 4:
+                    panelmode = "graph";
+                    break;
+            }
+            plotside = Convert.ToByte(Properties.Settings.Default.PlotSide);
+            toolStripModeSwitch.Checked = Properties.Settings.Default.AutoALT;
         }
 
         private void PreProcess(ref string str)
@@ -340,6 +366,7 @@ namespace Calculator
             csel += ((Button)sender).Text.Length ;
             ScreenBox.Focus();
             ScreenBox.Select(csel, 0);
+            if (Properties.Settings.Default.AutoALT && checkBoxMode.Checked) checkBoxMode.Checked = false;
         }
 
         private void buttonFunct_Click(object sender, EventArgs e)
@@ -356,6 +383,7 @@ namespace Calculator
             csel += ((Button)sender).Text.Length+1;
             ScreenBox.Focus();
             ScreenBox.Select(csel, 0);
+            if (Properties.Settings.Default.AutoALT && checkBoxMode.Checked) checkBoxMode.Checked = false;
         }
 
         // Вывод истории в увеличенном варианте
@@ -451,6 +479,7 @@ namespace Calculator
             }
             ScreenBox.Focus();
             ScreenBox.Select(csel, 0);
+            if (Properties.Settings.Default.AutoALT && checkBoxMode.Checked) checkBoxMode.Checked = false;
         }
 
         // Очистка экрана
@@ -464,7 +493,7 @@ namespace Calculator
             {
                 HistoryBox1.Clear();
             }
-            
+            if (Properties.Settings.Default.AutoALT && checkBoxMode.Checked) checkBoxMode.Checked = false;
         }
 
         // Начать вычисление
@@ -767,6 +796,45 @@ namespace Calculator
             plotter.Show();
             plotter.Focus();
         }
-        
+
+        private void toolStripSettings_Click(object sender, EventArgs e)
+        {
+            SettingsForm SF = new SettingsForm();
+            SF.ShowDialog();
+        }
+
+        private void toolStripModeSwitch_CheckStateChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.AutoALT = toolStripModeSwitch.Checked ;
+            Properties.Settings.Default.Save();
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (Properties.Settings.Default.StartPanelLast)
+            {
+                switch (panelmode)
+                {
+                    case "norm":
+                    default:
+                        Properties.Settings.Default.StartPanel = 0;
+                        break;
+                    case "engen":
+                        Properties.Settings.Default.StartPanel = 1;
+                        break;
+                    case "prog":
+                        Properties.Settings.Default.StartPanel = 2;
+                        break;
+                    case "matr":
+                        Properties.Settings.Default.StartPanel = 3;
+                        break;
+                    case "graph":
+                        Properties.Settings.Default.StartPanel = 4;
+                        break;
+                }
+                Properties.Settings.Default.Save();
+            }
+        }
+  
     }
 }

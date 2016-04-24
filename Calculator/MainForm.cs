@@ -493,7 +493,13 @@ namespace Calculator
         {
             if (buttonEnter.Text == "WA=")
             {
-
+                if (ScreenBox.Text.Length > 200 && (DialogResult.Yes != MessageBox.Show("Похоже, у вас слишком длинный.. запрос. Возможно, WolframAlpha обрежет его и вычисления будут неверны. Продолжить?", "Превышена длина запроса", MessageBoxButtons.YesNo, MessageBoxIcon.Question)))
+                    return ;
+                string inpstr = "WAQUERY~" + ScreenBox.Text;
+                WolframResult WR = new WolframResult();
+                WR.ShowAndCalculate(inpstr);
+                if (HistoryBox1.Text == "") HistoryBox1.Text += inpstr;
+                else HistoryBox1.Text += "\r\n" + inpstr;
             }
             else
             {

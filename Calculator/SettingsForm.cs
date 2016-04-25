@@ -31,6 +31,13 @@ namespace Calculator
                 checkedListBox2.SetItemChecked(Properties.Settings.Default.StartPanel, true);
             checkedListBox3.SetItemChecked(Properties.Settings.Default.HistoryMode, true);
             checkedListBox4.SetItemChecked(Properties.Settings.Default.PlotSide, true);
+
+            textBox1.Text = Properties.Settings.Default.WA_AppKey;
+            textBox2.Text = Properties.Settings.Default.WA_RespSend.ToString() + "/" + Properties.Settings.Default.WA_RespLimit.ToString();
+            checkBox3.Checked = Properties.Settings.Default.WA_RespWipe;
+            checkBox4.Checked = Properties.Settings.Default.WA_LoadImages ;
+            checkBox5.Checked = Properties.Settings.Default.WA_UseCache;
+            textBox3.Text = Properties.Settings.Default.WA_CacheSize.ToString();
         }
 
         private void checkedListBox_ItemCheck(object sender, ItemCheckEventArgs e)
@@ -56,6 +63,13 @@ namespace Calculator
             checkedListBox2.SetItemChecked(0, true);
             checkedListBox3.SetItemChecked(0, true);
             checkedListBox4.SetItemChecked(0, true); //TopLeft=0, BotLeft=1, TopRight=2, BotRight=3
+
+            textBox1.Text = "";
+            textBox2.Text = "0/0";
+            checkBox3.Checked = true;
+            checkBox4.Checked = false;
+            checkBox5.Checked = false;
+            textBox3.Text = "";
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -83,9 +97,24 @@ namespace Calculator
             }
             Properties.Settings.Default.HistoryMode = checkedListBox3.CheckedIndices[0];
             Properties.Settings.Default.PlotSide = checkedListBox4.CheckedIndices[0];
+
+            Properties.Settings.Default.WA_AppKey = textBox1.Text;
+            string[] tstr = textBox2.Text.Split(new char[] {'/'});
+            Properties.Settings.Default.WA_RespSend = Convert.ToInt32(tstr[0]);
+            Properties.Settings.Default.WA_RespLimit = Convert.ToInt32(tstr[1]);
+            Properties.Settings.Default.WA_RespWipe = checkBox3.Checked;
+            Properties.Settings.Default.WA_LoadImages = checkBox4.Checked;
+            Properties.Settings.Default.WA_UseCache = checkBox5.Checked;
+            Properties.Settings.Default.WA_CacheSize = Convert.ToDouble(textBox3.Text);
+
             Properties.Settings.Default.Save();
             MessageBox.Show("Для применения настроек перезапустите программу", "Настройки", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
+        }
+
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            textBox2.Enabled = checkBox2.Checked;
         }
     }
 }

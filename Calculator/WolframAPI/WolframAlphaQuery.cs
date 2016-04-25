@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 
 namespace WolframAlphaAPI
@@ -102,7 +104,8 @@ namespace WolframAlphaAPI
 
         public String FullQueryString
         {
-            get { return "?appid=" + WA_APIKey + "&moreoutput=" + MoreOutput + "&timelimit=" + TimeLimit + "&format=" + WA_Format + "&input=" + WA_Query + WA_Assumption + WA_Substitution; }
+            get { return "?appid=" + WA_APIKey + "&moreoutput=" + MoreOutput + "&timelimit=" + TimeLimit + "&format=" + WA_Format + "&input=" + HttpUtility.UrlEncode(WA_Query) + WA_Assumption + WA_Substitution; }
         }
+
     }
 }

@@ -94,5 +94,101 @@ namespace Calculator.Properties {
                 this["PlotSide"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string WA_AppKey {
+            get {
+                return ((string)(this["WA_AppKey"]));
+            }
+            set {
+                this["WA_AppKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int WA_RespSend {
+            get {
+                return ((int)(this["WA_RespSend"]));
+            }
+            set {
+                this["WA_RespSend"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int WA_RespLimit {
+            get {
+                return ((int)(this["WA_RespLimit"]));
+            }
+            set {
+                this["WA_RespLimit"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool WA_RespWipe {
+            get {
+                return ((bool)(this["WA_RespWipe"]));
+            }
+            set {
+                this["WA_RespWipe"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool WA_LoadImages {
+            get {
+                return ((bool)(this["WA_LoadImages"]));
+            }
+            set {
+                this["WA_LoadImages"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool WA_UseCache {
+            get {
+                return ((bool)(this["WA_UseCache"]));
+            }
+            set {
+                this["WA_UseCache"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double WA_CacheSize {
+            get {
+                return ((double)(this["WA_CacheSize"]));
+            }
+            set {
+                this["WA_CacheSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1990-01-01")]
+        public global::System.DateTime WA_LastWipe {
+            get {
+                return ((global::System.DateTime)(this["WA_LastWipe"]));
+            }
+            set {
+                this["WA_LastWipe"] = value;
+            }
+        }
     }
 }

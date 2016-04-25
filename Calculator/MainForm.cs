@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using WolframAlphaAPI;
 
 /*
 -//  1) Новый экран вывода данных
@@ -32,6 +33,11 @@ namespace Calculator
             ChangeModeTo(panelmode);
             ChangeSSTo(SSmode);
             ChangeGradusTo(gradusmode);
+            if ((Properties.Settings.Default.WA_LastWipe.Month < DateTime.Now.Month && Properties.Settings.Default.WA_LastWipe.Year < DateTime.Now.Year) || (Properties.Settings.Default.WA_LastWipe > DateTime.Now))
+            {
+                Properties.Settings.Default.WA_LastWipe = DateTime.Now;
+                Properties.Settings.Default.WA_RespSend = 100;
+            }
         }
 
         private void LoadSettings()
@@ -495,10 +501,24 @@ namespace Calculator
             {
                 if (ScreenBox.Text.Length > 200 && (DialogResult.Yes != MessageBox.Show("Похоже, у вас слишком длинный.. запрос. Возможно, WolframAlpha обрежет его и вычисления будут неверны. Продолжить?", "Превышена длина запроса", MessageBoxButtons.YesNo, MessageBoxIcon.Question)))
                     return ;
-                string inpstr = "WAQUERY~" + ScreenBox.Text;
+                string inpstr = ScreenBox.Text;
+
+                String WolframAlphaApplicationID = Properties.Settings.Default.WA_AppKey;
+                if (WolframAlphaApplicationID == "")
+                {
+                    MessageBox.Show("Неверно задан ключ для WolframAPI. Введите действительный ключ.", "Не задан ключ приложения", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    return;
+                }
+                if (Properties.Settings.Default.WA_RespSend >= Properties.Settings.Default.WA_RespLimit)
+                {
+                    MessageBox.Show("Неверно задан ключ для WolframAPI. Введите действительный ключ.", "Превышен лимит запросов", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    return;
+                }
+
+                ScreenBox.Clear();
                 WolframResult WR = new WolframResult();
-                WR.ShowAndCalculate(inpstr);
-                if (HistoryBox1.Text == "") HistoryBox1.Text += inpstr;
+                WR.ShowAndCalculate(inpstr, WolframAlphaApplicationID);
+                if (HistoryBox1.Text == "") HistoryBox1.Text += "WAQUERY~" + inpstr;
                 else HistoryBox1.Text += "\r\n" + inpstr;
             }
             else
@@ -577,7 +597,7 @@ namespace Calculator
                 buttonStep2_N.Text = "^3";
                 buttonStepM1_N.Text = "^";
                 button00_N.Text = "00";
-                buttonClr_N.Text = "HClr";
+                buttonClr_N.Text = "HCLR";
                 //Инженерная панель
                 buttonSin.Text = "ASin";
                 buttonCos.Text = "ACos";
@@ -587,13 +607,13 @@ namespace Calculator
                 buttonStep2.Text = "^3";
                 buttonSqrt.Text = "Cbrt";
                 button00.Text = "00";
-                buttonClr.Text = "HClr";
+                buttonClr.Text = "HCLR";
                 //Матричная панель
                 button00_M.Text = "00";
-                buttonClr_M.Text = "HClr";
+                buttonClr_M.Text = "HCLR";
                 //Программная панель
                 button00_P.Text = "00";
-                buttonClr_P.Text = "HClr";
+                buttonClr_P.Text = "HCLR";
                 //Переключение в Wolfram-калькулятор
                 if (allowwolfram)
                 {
@@ -617,7 +637,7 @@ namespace Calculator
                 buttonStep2_N.Text = "^2";
                 buttonStepM1_N.Text = "^-1";
                 button00_N.Text = "0";
-                buttonClr_N.Text = "Clr";
+                buttonClr_N.Text = "CLR";
                 //Инженерная панель
                 buttonSin.Text = "Sin";
                 buttonCos.Text = "Cos";
@@ -627,13 +647,13 @@ namespace Calculator
                 buttonStep2.Text = "^2";
                 buttonSqrt.Text = "Sqrt";
                 button00.Text = "0";
-                buttonClr.Text = "Clr";
+                buttonClr.Text = "CLR";
                 //Матричная панель
                 button00_M.Text = "0";
-                buttonClr_M.Text = "Clr";
+                buttonClr_M.Text = "CLR";
                 //Программная панель
                 button00_P.Text = "0";
-                buttonClr_P.Text = "Clr";
+                buttonClr_P.Text = "CLR";
                 //Переключение в Wolfram-калькулятор
                 if (buttonEnter.Text == "WA=") buttonEnter.Text = "=";
                 if (buttonEnter_M.Text == "WA=") buttonEnter_M.Text = "=";

@@ -91,10 +91,12 @@
             this.toolStripMode5 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripModeSwitch = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripWASwitch = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSettings = new System.Windows.Forms.ToolStripButton();
             this.toolStripHelp = new System.Windows.Forms.ToolStripButton();
             this.toolStripSSMode = new System.Windows.Forms.ToolStripLabel();
             this.toolStripGradMode = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripWA = new System.Windows.Forms.ToolStripLabel();
             this.buttonLbr_M = new System.Windows.Forms.Button();
             this.buttonRbr_M = new System.Windows.Forms.Button();
             this.buttonNewMatr_M = new System.Windows.Forms.Button();
@@ -199,8 +201,6 @@
             this.buttonZoomMinus = new System.Windows.Forms.Button();
             this.buttonZoomPlus = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.toolStripWASwitch = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripWA = new System.Windows.Forms.ToolStripLabel();
             this.panelGrad.SuspendLayout();
             this.panelModes.SuspendLayout();
             this.panelEngeneer.SuspendLayout();
@@ -976,6 +976,14 @@
             this.toolStripModeSwitch.Text = "Автоотключение ALT";
             this.toolStripModeSwitch.CheckStateChanged += new System.EventHandler(this.toolStripModeSwitch_CheckStateChanged);
             // 
+            // toolStripWASwitch
+            // 
+            this.toolStripWASwitch.CheckOnClick = true;
+            this.toolStripWASwitch.Name = "toolStripWASwitch";
+            this.toolStripWASwitch.Size = new System.Drawing.Size(227, 22);
+            this.toolStripWASwitch.Text = "Разрешить вычисления WA";
+            this.toolStripWASwitch.CheckStateChanged += new System.EventHandler(this.toolStripWASwitch_CheckStateChanged);
+            // 
             // toolStripSettings
             // 
             this.toolStripSettings.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -1011,6 +1019,16 @@
             this.toolStripGradMode.Name = "toolStripGradMode";
             this.toolStripGradMode.Size = new System.Drawing.Size(30, 22);
             this.toolStripGradMode.Text = "RAD";
+            // 
+            // toolStripWA
+            // 
+            this.toolStripWA.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripWA.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripWA.Image = global::Calculator.Properties.Resources.wa;
+            this.toolStripWA.Name = "toolStripWA";
+            this.toolStripWA.Size = new System.Drawing.Size(16, 22);
+            this.toolStripWA.Text = "WA";
+            this.toolStripWA.Visible = false;
             // 
             // buttonLbr_M
             // 
@@ -2339,24 +2357,6 @@
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
             this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
-            // 
-            // toolStripWASwitch
-            // 
-            this.toolStripWASwitch.CheckOnClick = true;
-            this.toolStripWASwitch.Name = "toolStripWASwitch";
-            this.toolStripWASwitch.Size = new System.Drawing.Size(227, 22);
-            this.toolStripWASwitch.Text = "Разрешить вычисления WA";
-            this.toolStripWASwitch.CheckStateChanged += new System.EventHandler(this.toolStripWASwitch_CheckStateChanged);
-            // 
-            // toolStripWA
-            // 
-            this.toolStripWA.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripWA.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripWA.Image = global::Calculator.Properties.Resources.wa;
-            this.toolStripWA.Name = "toolStripWA";
-            this.toolStripWA.Size = new System.Drawing.Size(16, 22);
-            this.toolStripWA.Text = "WA";
-            this.toolStripWA.Visible = false;
             // 
             // MainForm
             // 

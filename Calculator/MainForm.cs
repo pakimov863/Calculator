@@ -511,7 +511,7 @@ namespace Calculator
                 }
                 if (Properties.Settings.Default.WA_RespSend >= Properties.Settings.Default.WA_RespLimit)
                 {
-                    MessageBox.Show("Неверно задан ключ для WolframAPI. Введите действительный ключ.", "Превышен лимит запросов", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    MessageBox.Show("Превышен месячный лимит запросов. Увеличте лимит в настройках или плачьте.", "Превышен лимит запросов", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     return;
                 }
 

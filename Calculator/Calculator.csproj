@@ -110,6 +110,12 @@
     <Compile Include="WolframAPI\WolframResult.Designer.cs">
       <DependentUpon>WolframResult.cs</DependentUpon>
     </Compile>
+    <Compile Include="WolframAPI\WolframPod.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WolframAPI\WolframPod.Designer.cs">
+      <DependentUpon>WolframPod.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="HistoryTile.resx">
       <DependentUpon>HistoryTile.cs</DependentUpon>
     </EmbeddedResource>
@@ -138,6 +144,9 @@
     <EmbeddedResource Include="SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WolframAPI\WolframPod.resx">
+      <DependentUpon>WolframPod.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WolframAPI\WolframResult.resx">
       <DependentUpon>WolframResult.cs</DependentUpon>
     </EmbeddedResource>
@@ -154,6 +163,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="img.ico" />
+    <Content Include="WolframAPI\wa.ico" />
     <None Include="Resources\anim_074.png" />
     <None Include="Resources\anim_073.png" />
     <None Include="Resources\anim_072.png" />

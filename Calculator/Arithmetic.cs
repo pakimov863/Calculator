@@ -122,16 +122,18 @@ namespace Calculator
             //(\-?\d+(\.\d{0,})?)
             Regex operations = new Regex(@"\+|\-|_|\*|\/|\^|⋮|⋯|⋰|⋱|SQRT|QBRT|XQRT|ASIN|SINH|SIN|ACOS|COSH|COS|ATG|TGH|TG|ACTG|CTGH|CTG|LN|LG|LOG|EXP|\!");
             Regex brackets = new Regex(@"\(|\)");
-            string[] priority = { "SQRT", "QBRT", "XQRT", "ASIN", "SINH", "SIN", "ACOS", "COSH", "COS", "ATG", "TGH", "TG", "ACTG", "CTGH", "CTG", "LN", "LG", "LOG", "EXP", "!", "^"/*, "_"*/, "⋰", "⋱", "⋯", "⋮", "*", "/", "-", "+" };//⋮=+%, ⋯=-%, ⋰=*%, ⋱=/%
+            string[] priority = { "SQRT", "QBRT", "XQRT", "ASIN", "SINH", "SIN", "ACOS", "COSH", "COS", "ATG", "TGH", "TG", "ACTG", "CTGH", "CTG", "LN", "LG", "LOG", "EXP", "!", "^", "⋰", "⋱", "⋯", "⋮", "*", "/", "-", "+", "_" };//⋮=+%, ⋯=-%, ⋰=*%, ⋱=/%
 
             Stack<string> stack = new Stack<string>();
             List<Token> list = new List<Token>();
+            bool operleft = true;
 
             foreach (Match match in collection)
             {
                 Match temp = variables.Match(match.Value);
                 if (temp.Success)
                 {
+                    operleft = false;
                     list.Add(new Token(temp.Value, TokenType.Variable));
                 }
 
@@ -139,6 +141,7 @@ namespace Calculator
                 if (temp.Success)
                 {
                     //stack isEmpty() ?
+                    operleft = true;
                     if (temp.Value == "(") { stack.Push(temp.Value); continue; }
                     string operation = stack.Pop();
                     while (operation != "(")
@@ -152,16 +155,20 @@ namespace Calculator
                 temp = operations.Match(match.Value);
                 if (temp.Success)
                 {
+                    string tempValue = temp.Value;
+                    if (operleft && tempValue == "-") tempValue = "_";
+                    operleft = true;
+
                     if (stack.Count != 0)
                     {
-                        while (Array.IndexOf(priority, temp.Value) >= Array.IndexOf(priority, stack.Peek()))
+                        while (Array.IndexOf(priority, tempValue) >= Array.IndexOf(priority, stack.Peek()))
                         {
                             if (stack.Peek() == "(") break;
                             list.Add(new Token(stack.Pop(), TokenType.Operation));
                             if (stack.Count == 0) break;
                         }
                     }
-                    stack.Push(temp.Value);
+                    stack.Push(tempValue);
                 }
             }
 
@@ -221,7 +228,9 @@ namespace Calculator
                             result.Push(Math.Pow(a, 1 / 3));
                             break;
                         case "XQRT":
-                            
+                            a = result.Pop();
+                            b = result.Pop();
+                            result.Push(Math.Pow(a, 1 / b));
                             break;
                         case "ASIN":
                             a = result.Pop();

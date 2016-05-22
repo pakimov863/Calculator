@@ -98,10 +98,11 @@ namespace Calculator
                 str = str.Replace("/%", "⋱");
             }
 
-            /*string symbols = "+|-|*|/|^|⋮|⋯|⋰|⋱|SQRT|QBRT|XQRT|ASIN|SINH|SIN|ACOS|COSH|COS|ATG|TGH|TG|ACTG|CTGH|CTG|LN|LG|LOG|EXP|!";
-            if (str.Contains("-"))
+            //string symbols = "+|-|*|/|^|⋮|⋯|⋰|⋱|SQRT|QBRT|XQRT|ASIN|SINH|SIN|ACOS|COSH|COS|ATG|TGH|TG|ACTG|CTGH|CTG|LN|LG|LOG|EXP|!";
+            /*if (str.Contains("-"))
             {
                 string[] tstr = str.Split('-');
+                string retstr = "";
                 for (int i = 0; i < tstr.Length; i++)
                 {
                     if(tstr[i] == "" || )
@@ -500,7 +501,7 @@ namespace Calculator
         private void buttonEnter_Click(object sender, EventArgs e)
         {
             string inpstr = ScreenBox.Text;
-            if (inpstr.Contains("X") || inpstr.Contains("Y"))
+            if (/*inpstr.Contains("X") || inpstr.Contains("Y")*/ false)
             {
                 buttonDigit_Click(sender, e);
             }

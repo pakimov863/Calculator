@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using WolframAlphaAPI;
 
 /*
 -//  1) Новый экран вывода данных
@@ -22,6 +23,7 @@ namespace Calculator
         public byte gradusmode = 0;
         public int SSmode = 10;
         public double plotmultiplier = 1;
+        public bool allowwolfram = false;
         public PlotForm plotter;
 
         public MainForm()
@@ -31,6 +33,11 @@ namespace Calculator
             ChangeModeTo(panelmode);
             ChangeSSTo(SSmode);
             ChangeGradusTo(gradusmode);
+            if ((Properties.Settings.Default.WA_LastWipe.Month < DateTime.Now.Month && Properties.Settings.Default.WA_LastWipe.Year < DateTime.Now.Year) || (Properties.Settings.Default.WA_LastWipe > DateTime.Now))
+            {
+                Properties.Settings.Default.WA_LastWipe = DateTime.Now;
+                Properties.Settings.Default.WA_RespSend = 100;
+            }
         }
 
         private void LoadSettings()
@@ -60,7 +67,7 @@ namespace Calculator
 
         private void PreProcess(ref string str)
         {
-            str = "(" + str.ToUpper() + ")";
+            //str = "(" + str.ToUpper() + ")";
             str = str.Replace("PI", Convert.ToString(Math.PI));
             //str = str.Replace("E", Convert.ToString(Math.E));
 
@@ -98,11 +105,10 @@ namespace Calculator
                 str = str.Replace("/%", "⋱");
             }
 
-            //string symbols = "+|-|*|/|^|⋮|⋯|⋰|⋱|SQRT|QBRT|XQRT|ASIN|SINH|SIN|ACOS|COSH|COS|ATG|TGH|TG|ACTG|CTGH|CTG|LN|LG|LOG|EXP|!";
-            /*if (str.Contains("-"))
+            /*string symbols = "+|-|*|/|^|⋮|⋯|⋰|⋱|SQRT|QBRT|XQRT|ASIN|SINH|SIN|ACOS|COSH|COS|ATG|TGH|TG|ACTG|CTGH|CTG|LN|LG|LOG|EXP|!";
+            if (str.Contains("-"))
             {
                 string[] tstr = str.Split('-');
-                string retstr = "";
                 for (int i = 0; i < tstr.Length; i++)
                 {
                     if(tstr[i] == "" || )
@@ -463,15 +469,6 @@ namespace Calculator
         // Бекспейс
         private void buttonBack_Click(object sender, EventArgs e)
         {
-            /*
-            Dim csel As Integer = TextBox1.SelectionStart
-            If (TextBox1.Text.Length <> 0 And csel <> 0) Then
-                TextBox1.Text = TextBox1.Text.Substring(0, csel - 1) + TextBox1.Text.Substring(csel, TextBox1.Text.Length - csel)
-                csel -= 1
-            End If
-            TextBox1.Focus()
-            TextBox1.Select(csel, 0)
-            */
             int csel = ScreenBox.SelectionStart;
             if (ScreenBox.Text.Length != 0 && csel != 0)
             {
@@ -500,66 +497,93 @@ namespace Calculator
         // Начать вычисление
         private void buttonEnter_Click(object sender, EventArgs e)
         {
-            string inpstr = ScreenBox.Text;
-            if (/*inpstr.Contains("X") || inpstr.Contains("Y")*/ false)
+            if (buttonEnter.Text == "WA=")
             {
-                buttonDigit_Click(sender, e);
+                if (ScreenBox.Text.Length > 200 && (DialogResult.Yes != MessageBox.Show("Похоже, у вас слишком длинный.. запрос. Возможно, WolframAlpha обрежет его и вычисления будут неверны. Продолжить?", "Превышена длина запроса", MessageBoxButtons.YesNo, MessageBoxIcon.Question)))
+                    return ;
+                string inpstr = ScreenBox.Text;
+
+                String WolframAlphaApplicationID = Properties.Settings.Default.WA_AppKey;
+                if (WolframAlphaApplicationID == "")
+                {
+                    MessageBox.Show("Неверно задан ключ для WolframAPI. Введите действительный ключ.", "Не задан ключ приложения", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    return;
+                }
+                if (Properties.Settings.Default.WA_RespSend >= Properties.Settings.Default.WA_RespLimit)
+                {
+                    MessageBox.Show("Превышен месячный лимит запросов. Увеличте лимит в настройках или плачьте.", "Превышен лимит запросов", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    return;
+                }
+
+                ScreenBox.Clear();
+                WolframResult WR = new WolframResult();
+                WR.ShowAndCalculate(inpstr, WolframAlphaApplicationID);
+                if (HistoryBox1.Text == "") HistoryBox1.Text += "WAQUERY~" + inpstr;
+                else HistoryBox1.Text += "\r\n" + inpstr;
             }
             else
             {
-                string heststr = inpstr;
-                PreProcess(ref inpstr);
-                string result = "";
-
-                switch (panelmode)
+                string inpstr = ScreenBox.Text;
+                if (inpstr.Contains("X") || inpstr.Contains("Y"))
                 {
-                    case "norm":
-                    case "engen":
-                    default:
-                        //Вычисление на обычной или инженерной панели
-                        List<Token> RPN1 = Arithmetic.GetRPN(inpstr);
-                        result = Convert.ToString(Arithmetic.Calculate(ref RPN1, gradusmode));
-                        result = PostProcess(Convert.ToDouble(result));
-                        if(RPN1!=null) RPN1.Clear();
-                        break;
-                    case "prog":
-                        //Вычисление на програмной панели
-                        if (radioLogicExpr.Checked)
-                        {
-                            List<Token> RPN2 = BinaryArithmetic.GetRPN(inpstr);
-                            Dictionary<string, bool> variables = BinaryArithmetic.GetVariables(RPN2);
-                            int count = (int)Math.Pow(2, variables.Count);
-                            result = "{[";
-                            for (int i = 0; i < count; i++)
-                            {
-                                BinaryArithmetic.AddVariableData(i + count, variables);
-                                result += (BinaryArithmetic.Calculate(RPN2, variables) ? "1|" : "0|");
-                            }
-                            result = result.Substring(0, result.Length - 1) + "]}";
-                        }
-                        else
-                        {
-                            List<Token> RPN2 = Arithmetic.GetRPN(BinaryArithmetic.ConvertStringToSS(inpstr, SSmode, 10));
-                            result = Convert.ToString(Arithmetic.Calculate(ref RPN2, gradusmode));
-                            result = BinaryArithmetic.ConvertStringToSS(result, 10, SSmode);
-                            if(RPN2!=null)RPN2.Clear();
-                        }
-                        break;
-                    case "matr":
-                        //Вычисление на матричной панели
-                        Dictionary<string, string> mas = new Dictionary<string, string>();
-                        MatrixArithmetic.GetMatrixes(ref inpstr, ref mas);
-                        List<Token> RPN3 = MatrixArithmetic.GetRPN(inpstr);
-                        result = MatrixArithmetic.Calculate(RPN3, mas);
-                        if(RPN3!=null)RPN3.Clear();
-                        mas.Clear();
-                        break;
+                    buttonDigit_Click(sender, e);
                 }
+                else
+                {
+                    string heststr = inpstr;
+                    PreProcess(ref inpstr);
+                    string result = "";
 
-                heststr += "=" + result;
-                ScreenBox.Text = result;
-                if (HistoryBox1.Text == "") HistoryBox1.Text += heststr;
-                else HistoryBox1.Text += "\r\n" + heststr;
+                    switch (panelmode)
+                    {
+                        case "norm":
+                        case "engen":
+                        default:
+                            //Вычисление на обычной или инженерной панели
+                            List<Token> RPN1 = Arithmetic.GetRPN(inpstr);
+                            result = Convert.ToString(Arithmetic.Calculate(ref RPN1, gradusmode));
+                            result = PostProcess(Convert.ToDouble(result));
+                            if (RPN1 != null) RPN1.Clear();
+                            break;
+                        case "prog":
+                            //Вычисление на програмной панели
+                            if (radioLogicExpr.Checked)
+                            {
+                                List<Token> RPN2 = BinaryArithmetic.GetRPN(inpstr);
+                                Dictionary<string, bool> variables = BinaryArithmetic.GetVariables(RPN2);
+                                int count = (int)Math.Pow(2, variables.Count);
+                                result = "{[";
+                                for (int i = 0; i < count; i++)
+                                {
+                                    BinaryArithmetic.AddVariableData(i + count, variables);
+                                    result += (BinaryArithmetic.Calculate(RPN2, variables) ? "1|" : "0|");
+                                }
+                                result = result.Substring(0, result.Length - 1) + "]}";
+                            }
+                            else
+                            {
+                                List<Token> RPN2 = Arithmetic.GetRPN(BinaryArithmetic.ConvertStringToSS(inpstr, SSmode, 10));
+                                result = Convert.ToString(Arithmetic.Calculate(ref RPN2, gradusmode));
+                                result = BinaryArithmetic.ConvertStringToSS(result, 10, SSmode);
+                                if (RPN2 != null) RPN2.Clear();
+                            }
+                            break;
+                        case "matr":
+                            //Вычисление на матричной панели
+                            Dictionary<string, string> mas = new Dictionary<string, string>();
+                            MatrixArithmetic.GetMatrixes(ref inpstr, ref mas);
+                            List<Token> RPN3 = MatrixArithmetic.GetRPN(inpstr);
+                            result = MatrixArithmetic.Calculate(RPN3, mas);
+                            if (RPN3 != null) RPN3.Clear();
+                            mas.Clear();
+                            break;
+                    }
+
+                    heststr += "=" + result;
+                    ScreenBox.Text = result;
+                    if (HistoryBox1.Text == "") HistoryBox1.Text += heststr;
+                    else HistoryBox1.Text += "\r\n" + heststr;
+                }
             }
         }
 
@@ -573,7 +597,7 @@ namespace Calculator
                 buttonStep2_N.Text = "^3";
                 buttonStepM1_N.Text = "^";
                 button00_N.Text = "00";
-                buttonClr_N.Text = "HClr";
+                buttonClr_N.Text = "HCLR";
                 //Инженерная панель
                 buttonSin.Text = "ASin";
                 buttonCos.Text = "ACos";
@@ -583,13 +607,28 @@ namespace Calculator
                 buttonStep2.Text = "^3";
                 buttonSqrt.Text = "Cbrt";
                 button00.Text = "00";
-                buttonClr.Text = "HClr";
+                buttonClr.Text = "HCLR";
                 //Матричная панель
                 button00_M.Text = "00";
-                buttonClr_M.Text = "HClr";
+                buttonClr_M.Text = "HCLR";
                 //Программная панель
                 button00_P.Text = "00";
-                buttonClr_P.Text = "HClr";
+                buttonClr_P.Text = "HCLR";
+                //Переключение в Wolfram-калькулятор
+                if (allowwolfram)
+                {
+                    buttonEnter_M.Text = "WA=";
+                    buttonEnter_N.Text = "WA=";
+                    buttonEnter_P.Text = "WA=";
+                    buttonEnter.Text = "WA=";
+                }
+                else
+                {
+                    buttonEnter_M.Text = "=";
+                    buttonEnter_N.Text = "=";
+                    buttonEnter_P.Text = "=";
+                    buttonEnter.Text = "=";
+                }
             }
             else
             {
@@ -598,7 +637,7 @@ namespace Calculator
                 buttonStep2_N.Text = "^2";
                 buttonStepM1_N.Text = "^-1";
                 button00_N.Text = "0";
-                buttonClr_N.Text = "Clr";
+                buttonClr_N.Text = "CLR";
                 //Инженерная панель
                 buttonSin.Text = "Sin";
                 buttonCos.Text = "Cos";
@@ -608,13 +647,18 @@ namespace Calculator
                 buttonStep2.Text = "^2";
                 buttonSqrt.Text = "Sqrt";
                 button00.Text = "0";
-                buttonClr.Text = "Clr";
+                buttonClr.Text = "CLR";
                 //Матричная панель
                 button00_M.Text = "0";
-                buttonClr_M.Text = "Clr";
+                buttonClr_M.Text = "CLR";
                 //Программная панель
                 button00_P.Text = "0";
-                buttonClr_P.Text = "Clr";
+                buttonClr_P.Text = "CLR";
+                //Переключение в Wolfram-калькулятор
+                if (buttonEnter.Text == "WA=") buttonEnter.Text = "=";
+                if (buttonEnter_M.Text == "WA=") buttonEnter_M.Text = "=";
+                if (buttonEnter_N.Text == "WA=") buttonEnter_N.Text = "=";
+                if (buttonEnter_P.Text == "WA=") buttonEnter_P.Text = "=";
             }
         }
 
@@ -835,6 +879,23 @@ namespace Calculator
                 }
                 Properties.Settings.Default.Save();
             }
+        }
+
+        private void toolStripWASwitch_CheckStateChanged(object sender, EventArgs e)
+        {
+            if(toolStripWASwitch.Checked)
+            {
+                allowwolfram = true;
+                toolStripWA.Visible = true;
+                
+            }
+            else
+            {
+                allowwolfram = false;
+                toolStripWA.Visible = false;
+                
+            }
+            checkBoxMode_CheckedChanged(sender, e);
         }
   
     }

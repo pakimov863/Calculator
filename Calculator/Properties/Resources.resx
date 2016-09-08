@@ -118,10 +118,238 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="anim_0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_000.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_001.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_10" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_010.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_11" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_011.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_12" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_012.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_13" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_013.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_14" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_014.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_15" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_015.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_016.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_17" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_017.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_18" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_018.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_19" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_019.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_002.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_020.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_21" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_021.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_22" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_022.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_23" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_023.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_024.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_25" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_025.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_26" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_026.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_27" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_027.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_28" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_028.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_29" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_029.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_003.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_30" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_030.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_31" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_031.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_032.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_33" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_033.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_34" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_034.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_35" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_035.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_36" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_036.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_37" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_037.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_38" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_038.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_39" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_039.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_004.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_40" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_040.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_41" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_041.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_42" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_042.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_43" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_043.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_44" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_044.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_45" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_045.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_46" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_046.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_47" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_047.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_048.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_49" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_049.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_005.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_50" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_050.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_51" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_051.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_52" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_052.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_53" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_053.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_54" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_054.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_55" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_055.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_56" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_056.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_57" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_057.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_58" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_058.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_59" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_059.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_006.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_60" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_060.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_61" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_061.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_62" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_062.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_63" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_063.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_064.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_65" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_065.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_66" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_066.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_67" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_067.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_68" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_068.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_69" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_069.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_007.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_70" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_070.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_71" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_071.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_72" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_072.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_73" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_073.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_74" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_074.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_8" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_008.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="anim_9" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anim_009.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="help" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\help.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="prop" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\prop.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="wa" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\wa.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

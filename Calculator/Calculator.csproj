@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
@@ -93,6 +94,28 @@
     </Compile>
     <Compile Include="Token.cs" />
     <Compile Include="TokenType.cs" />
+    <Compile Include="Utils.cs" />
+    <Compile Include="WolframAPI\WolframAlphaAssumption.cs" />
+    <Compile Include="WolframAPI\WolframAlphaEngine.cs" />
+    <Compile Include="WolframAPI\WolframAlphaImage.cs" />
+    <Compile Include="WolframAPI\WolframAlphaPod.cs" />
+    <Compile Include="WolframAPI\WolframAlphaQuery.cs" />
+    <Compile Include="WolframAPI\WolframAlphaQueryFormat.cs" />
+    <Compile Include="WolframAPI\WolframAlphaQueryResult.cs" />
+    <Compile Include="WolframAPI\WolframAlphaSubPod.cs" />
+    <Compile Include="WolframAPI\WolframAlphaValidationResult.cs" />
+    <Compile Include="WolframAPI\WolframResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WolframAPI\WolframResult.Designer.cs">
+      <DependentUpon>WolframResult.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WolframAPI\WolframPod.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WolframAPI\WolframPod.Designer.cs">
+      <DependentUpon>WolframPod.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="HistoryTile.resx">
       <DependentUpon>HistoryTile.cs</DependentUpon>
     </EmbeddedResource>
@@ -121,6 +144,12 @@
     <EmbeddedResource Include="SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WolframAPI\WolframPod.resx">
+      <DependentUpon>WolframPod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WolframAPI\WolframResult.resx">
+      <DependentUpon>WolframResult.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -134,9 +163,87 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="img.ico" />
+    <Content Include="WolframAPI\wa.ico" />
+    <None Include="Resources\anim_074.png" />
+    <None Include="Resources\anim_073.png" />
+    <None Include="Resources\anim_072.png" />
+    <None Include="Resources\anim_071.png" />
+    <None Include="Resources\anim_070.png" />
+    <None Include="Resources\anim_069.png" />
+    <None Include="Resources\anim_068.png" />
+    <None Include="Resources\anim_067.png" />
+    <None Include="Resources\anim_066.png" />
+    <None Include="Resources\anim_065.png" />
+    <None Include="Resources\anim_064.png" />
+    <None Include="Resources\anim_063.png" />
+    <None Include="Resources\anim_062.png" />
+    <None Include="Resources\anim_061.png" />
+    <None Include="Resources\anim_060.png" />
+    <None Include="Resources\anim_059.png" />
+    <None Include="Resources\anim_058.png" />
+    <None Include="Resources\anim_057.png" />
+    <None Include="Resources\anim_056.png" />
+    <None Include="Resources\anim_055.png" />
+    <None Include="Resources\anim_054.png" />
+    <None Include="Resources\anim_053.png" />
+    <None Include="Resources\anim_052.png" />
+    <None Include="Resources\anim_051.png" />
+    <None Include="Resources\anim_050.png" />
+    <None Include="Resources\anim_049.png" />
+    <None Include="Resources\anim_048.png" />
+    <None Include="Resources\anim_047.png" />
+    <None Include="Resources\anim_046.png" />
+    <None Include="Resources\anim_045.png" />
+    <None Include="Resources\anim_044.png" />
+    <None Include="Resources\anim_043.png" />
+    <None Include="Resources\anim_042.png" />
+    <None Include="Resources\anim_041.png" />
+    <None Include="Resources\anim_040.png" />
+    <None Include="Resources\anim_039.png" />
+    <None Include="Resources\anim_038.png" />
+    <None Include="Resources\anim_037.png" />
+    <None Include="Resources\anim_036.png" />
+    <None Include="Resources\anim_035.png" />
+    <None Include="Resources\anim_034.png" />
+    <None Include="Resources\anim_033.png" />
+    <None Include="Resources\anim_032.png" />
+    <None Include="Resources\anim_031.png" />
+    <None Include="Resources\anim_030.png" />
+    <None Include="Resources\anim_029.png" />
+    <None Include="Resources\anim_028.png" />
+    <None Include="Resources\anim_027.png" />
+    <None Include="Resources\anim_026.png" />
+    <None Include="Resources\anim_025.png" />
+    <None Include="Resources\anim_024.png" />
+    <None Include="Resources\anim_023.png" />
+    <None Include="Resources\anim_022.png" />
+    <None Include="Resources\anim_021.png" />
+    <None Include="Resources\anim_020.png" />
+    <None Include="Resources\anim_019.png" />
+    <None Include="Resources\anim_018.png" />
+    <None Include="Resources\anim_017.png" />
+    <None Include="Resources\anim_016.png" />
+    <None Include="Resources\anim_015.png" />
+    <None Include="Resources\anim_014.png" />
+    <None Include="Resources\anim_013.png" />
+    <None Include="Resources\anim_012.png" />
+    <None Include="Resources\anim_011.png" />
+    <None Include="Resources\anim_010.png" />
+    <None Include="Resources\anim_009.png" />
+    <None Include="Resources\anim_008.png" />
+    <None Include="Resources\anim_007.png" />
+    <None Include="Resources\anim_006.png" />
+    <None Include="Resources\anim_005.png" />
+    <None Include="Resources\anim_004.png" />
+    <None Include="Resources\anim_003.png" />
+    <None Include="Resources\anim_002.png" />
+    <None Include="Resources\anim_001.png" />
+    <None Include="Resources\anim_000.png" />
+    <None Include="Resources\wa.png" />
     <None Include="Resources\prop.png" />
     <None Include="Resources\help.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

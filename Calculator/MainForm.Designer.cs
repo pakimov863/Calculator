@@ -91,10 +91,12 @@
             this.toolStripMode5 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripModeSwitch = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripWASwitch = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSettings = new System.Windows.Forms.ToolStripButton();
             this.toolStripHelp = new System.Windows.Forms.ToolStripButton();
             this.toolStripSSMode = new System.Windows.Forms.ToolStripLabel();
             this.toolStripGradMode = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripWA = new System.Windows.Forms.ToolStripLabel();
             this.buttonLbr_M = new System.Windows.Forms.Button();
             this.buttonRbr_M = new System.Windows.Forms.Button();
             this.buttonNewMatr_M = new System.Windows.Forms.Button();
@@ -886,7 +888,8 @@
             this.toolStripSettings,
             this.toolStripHelp,
             this.toolStripSSMode,
-            this.toolStripGradMode});
+            this.toolStripGradMode,
+            this.toolStripWA});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -904,7 +907,8 @@
             this.toolStripMode4,
             this.toolStripMode5,
             this.toolStripSeparator1,
-            this.toolStripModeSwitch});
+            this.toolStripModeSwitch,
+            this.toolStripWASwitch});
             this.toolStripModes.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripModes.Name = "toolStripModes";
             this.toolStripModes.Size = new System.Drawing.Size(40, 22);
@@ -918,7 +922,7 @@
             this.toolStripMode1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripMode1.Name = "toolStripMode1";
             this.toolStripMode1.ShowShortcutKeys = false;
-            this.toolStripMode1.Size = new System.Drawing.Size(191, 22);
+            this.toolStripMode1.Size = new System.Drawing.Size(227, 22);
             this.toolStripMode1.Text = "Обычный";
             this.toolStripMode1.Click += new System.EventHandler(this.toolStripModeChange_Click);
             // 
@@ -927,7 +931,7 @@
             this.toolStripMode2.CheckOnClick = true;
             this.toolStripMode2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripMode2.Name = "toolStripMode2";
-            this.toolStripMode2.Size = new System.Drawing.Size(191, 22);
+            this.toolStripMode2.Size = new System.Drawing.Size(227, 22);
             this.toolStripMode2.Text = "Инженерный";
             this.toolStripMode2.Click += new System.EventHandler(this.toolStripModeChange_Click);
             // 
@@ -936,7 +940,7 @@
             this.toolStripMode3.CheckOnClick = true;
             this.toolStripMode3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripMode3.Name = "toolStripMode3";
-            this.toolStripMode3.Size = new System.Drawing.Size(191, 22);
+            this.toolStripMode3.Size = new System.Drawing.Size(227, 22);
             this.toolStripMode3.Text = "Программист";
             this.toolStripMode3.Click += new System.EventHandler(this.toolStripModeChange_Click);
             // 
@@ -945,7 +949,7 @@
             this.toolStripMode4.CheckOnClick = true;
             this.toolStripMode4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripMode4.Name = "toolStripMode4";
-            this.toolStripMode4.Size = new System.Drawing.Size(191, 22);
+            this.toolStripMode4.Size = new System.Drawing.Size(227, 22);
             this.toolStripMode4.Text = "Матрицы";
             this.toolStripMode4.Click += new System.EventHandler(this.toolStripModeChange_Click);
             // 
@@ -954,23 +958,31 @@
             this.toolStripMode5.CheckOnClick = true;
             this.toolStripMode5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripMode5.Name = "toolStripMode5";
-            this.toolStripMode5.Size = new System.Drawing.Size(191, 22);
+            this.toolStripMode5.Size = new System.Drawing.Size(227, 22);
             this.toolStripMode5.Text = "Графики";
             this.toolStripMode5.Click += new System.EventHandler(this.toolStripModeChange_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(188, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(224, 6);
             // 
             // toolStripModeSwitch
             // 
             this.toolStripModeSwitch.CheckOnClick = true;
             this.toolStripModeSwitch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripModeSwitch.Name = "toolStripModeSwitch";
-            this.toolStripModeSwitch.Size = new System.Drawing.Size(191, 22);
+            this.toolStripModeSwitch.Size = new System.Drawing.Size(227, 22);
             this.toolStripModeSwitch.Text = "Автоотключение ALT";
             this.toolStripModeSwitch.CheckStateChanged += new System.EventHandler(this.toolStripModeSwitch_CheckStateChanged);
+            // 
+            // toolStripWASwitch
+            // 
+            this.toolStripWASwitch.CheckOnClick = true;
+            this.toolStripWASwitch.Name = "toolStripWASwitch";
+            this.toolStripWASwitch.Size = new System.Drawing.Size(227, 22);
+            this.toolStripWASwitch.Text = "Разрешить вычисления WA";
+            this.toolStripWASwitch.CheckStateChanged += new System.EventHandler(this.toolStripWASwitch_CheckStateChanged);
             // 
             // toolStripSettings
             // 
@@ -1007,6 +1019,16 @@
             this.toolStripGradMode.Name = "toolStripGradMode";
             this.toolStripGradMode.Size = new System.Drawing.Size(30, 22);
             this.toolStripGradMode.Text = "RAD";
+            // 
+            // toolStripWA
+            // 
+            this.toolStripWA.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripWA.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripWA.Image = global::Calculator.Properties.Resources.wa;
+            this.toolStripWA.Name = "toolStripWA";
+            this.toolStripWA.Size = new System.Drawing.Size(16, 22);
+            this.toolStripWA.Text = "WA";
+            this.toolStripWA.Visible = false;
             // 
             // buttonLbr_M
             // 
@@ -2552,6 +2574,8 @@
         private System.Windows.Forms.Button buttonZoomPlus;
         private System.Windows.Forms.Button buttonCreatePlot;
         private System.Windows.Forms.Button buttonAddPlotWindow;
+        private System.Windows.Forms.ToolStripMenuItem toolStripWASwitch;
+        private System.Windows.Forms.ToolStripLabel toolStripWA;
     }
 }
 

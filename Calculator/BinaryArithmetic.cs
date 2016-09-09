@@ -215,11 +215,16 @@ namespace Calculator
                 if (toss == 8) ca = ConvertFrom2To8;
                 if (toss == 2) return inputstring;
             }
+            else if (fromss > 2 && fromss < 16 && toss > 2 && toss < 16)
+            {
+                if (fromss == toss) return inputstring;
+                else ca = null;
+            }
             else return "ERR";
 
             MatchCollection collection = Regex.Matches(inputstring, @"\(|\)|[A-F]|[0-9]|\,|\+|\-|\*|\/");
 
-            Regex variables = new Regex(@"[A-N]|[0-9]|\,");
+            Regex variables = new Regex(@"[A-F]|[0-9]|\,");
             Regex operations = new Regex(@"\+|\-|\*|\/|\(|\)");
 
             string resultstring = "";
@@ -247,7 +252,8 @@ namespace Calculator
                 {
                     if (fl)
                     {
-                        resultstring += ca(t_str);
+                        if (ca == null) resultstring += ConvertFrom10ToX(ConvertFromXTo10(t_str, fromss), toss);
+                        else resultstring += ca(t_str);
                         t_str = "";
                         fl = false;
                     }
@@ -259,7 +265,8 @@ namespace Calculator
             
             if (fl)
             {
-                resultstring += ca(t_str);
+                if (ca == null) resultstring += ConvertFrom10ToX(ConvertFromXTo10(t_str, fromss), toss);
+                else resultstring += ca(t_str);
                 t_str = "";
                 fl = false;
             }
@@ -482,6 +489,36 @@ namespace Calculator
             return inputstring;
         }
         
+        // Конвертирование Из-В произвольные системы счисления
+
+        public static string ConvertFromXTo10(string inputstring, int x)
+        {
+            if (x < 2 || x > 16) return "ERR";
+
+            double result = 0;
+            int k = inputstring.Length - 1;
+            for (int i = 0; i < inputstring.Length; i++)
+            {
+                result += Convert.ToInt32(Char.GetNumericValue(inputstring[i])) * Math.Pow(x, k--);
+            }
+            return Convert.ToString(result);
+        }
+
+        public static string ConvertFrom10ToX(string inputstring, int x)
+        {
+            if (x < 2 || x > 16) return "ERR";
+
+            string result = "";
+            int inputnumber = Convert.ToInt32(inputstring);
+
+            while (Math.Abs(inputnumber) > x-1)
+            {
+                result = Convert.ToString((inputnumber % x)) + result;
+                inputnumber = Convert.ToInt32(Math.Truncate(Convert.ToDouble(inputnumber / x)));
+            }
+
+            return Convert.ToString(inputnumber + result);
+        }
         #endregion
     }
 }

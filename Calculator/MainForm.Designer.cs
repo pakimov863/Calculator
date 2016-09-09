@@ -154,8 +154,9 @@
             this.buttonLbr_N = new System.Windows.Forms.Button();
             this.buttonStepM1_N = new System.Windows.Forms.Button();
             this.panelSS = new System.Windows.Forms.Panel();
+            this.textSSX = new System.Windows.Forms.TextBox();
             this.radioSS2 = new System.Windows.Forms.RadioButton();
-            this.radioSS8 = new System.Windows.Forms.RadioButton();
+            this.radioSSX = new System.Windows.Forms.RadioButton();
             this.radioSS10 = new System.Windows.Forms.RadioButton();
             this.radioSS16 = new System.Windows.Forms.RadioButton();
             this.buttonIMP_P = new System.Windows.Forms.Button();
@@ -1749,8 +1750,9 @@
             // 
             // panelSS
             // 
+            this.panelSS.Controls.Add(this.textSSX);
             this.panelSS.Controls.Add(this.radioSS2);
-            this.panelSS.Controls.Add(this.radioSS8);
+            this.panelSS.Controls.Add(this.radioSSX);
             this.panelSS.Controls.Add(this.radioSS10);
             this.panelSS.Controls.Add(this.radioSS16);
             this.panelSS.Location = new System.Drawing.Point(183, 116);
@@ -1758,11 +1760,23 @@
             this.panelSS.Size = new System.Drawing.Size(165, 24);
             this.panelSS.TabIndex = 3;
             // 
+            // textSSX
+            // 
+            this.textSSX.Enabled = false;
+            this.textSSX.Location = new System.Drawing.Point(107, 2);
+            this.textSSX.MaxLength = 2;
+            this.textSSX.Name = "textSSX";
+            this.textSSX.Size = new System.Drawing.Size(20, 20);
+            this.textSSX.TabIndex = 4;
+            this.textSSX.Text = "8";
+            this.textSSX.TextChanged += new System.EventHandler(this.textSSX_TextChanged);
+            this.textSSX.LostFocus += new System.EventHandler(this.textSSX_LostFocus);
+            // 
             // radioSS2
             // 
             this.radioSS2.AutoSize = true;
             this.radioSS2.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.radioSS2.Location = new System.Drawing.Point(129, 3);
+            this.radioSS2.Location = new System.Drawing.Point(130, 3);
             this.radioSS2.Name = "radioSS2";
             this.radioSS2.Size = new System.Drawing.Size(32, 18);
             this.radioSS2.TabIndex = 3;
@@ -1770,24 +1784,24 @@
             this.radioSS2.UseVisualStyleBackColor = true;
             this.radioSS2.CheckedChanged += new System.EventHandler(this.radioSS_CheckedChanged);
             // 
-            // radioSS8
+            // radioSSX
             // 
-            this.radioSS8.AutoSize = true;
-            this.radioSS8.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.radioSS8.Location = new System.Drawing.Point(92, 3);
-            this.radioSS8.Name = "radioSS8";
-            this.radioSS8.Size = new System.Drawing.Size(32, 18);
-            this.radioSS8.TabIndex = 2;
-            this.radioSS8.Text = "8";
-            this.radioSS8.UseVisualStyleBackColor = true;
-            this.radioSS8.CheckedChanged += new System.EventHandler(this.radioSS_CheckedChanged);
+            this.radioSSX.AutoSize = true;
+            this.radioSSX.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.radioSSX.Location = new System.Drawing.Point(92, 3);
+            this.radioSSX.Name = "radioSSX";
+            this.radioSSX.Size = new System.Drawing.Size(32, 18);
+            this.radioSSX.TabIndex = 2;
+            this.radioSSX.Text = " ";
+            this.radioSSX.UseVisualStyleBackColor = true;
+            this.radioSSX.CheckedChanged += new System.EventHandler(this.radioSS_CheckedChanged);
             // 
             // radioSS10
             // 
             this.radioSS10.AutoSize = true;
             this.radioSS10.Checked = true;
             this.radioSS10.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.radioSS10.Location = new System.Drawing.Point(48, 3);
+            this.radioSS10.Location = new System.Drawing.Point(47, 3);
             this.radioSS10.Name = "radioSS10";
             this.radioSS10.Size = new System.Drawing.Size(39, 18);
             this.radioSS10.TabIndex = 1;
@@ -1800,7 +1814,7 @@
             // 
             this.radioSS16.AutoSize = true;
             this.radioSS16.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.radioSS16.Location = new System.Drawing.Point(4, 3);
+            this.radioSS16.Location = new System.Drawing.Point(3, 3);
             this.radioSS16.Name = "radioSS16";
             this.radioSS16.Size = new System.Drawing.Size(39, 18);
             this.radioSS16.TabIndex = 0;
@@ -2525,7 +2539,7 @@
         private System.Windows.Forms.RadioButton radioSS10;
         private System.Windows.Forms.RadioButton radioSS16;
         private System.Windows.Forms.RadioButton radioSS2;
-        private System.Windows.Forms.RadioButton radioSS8;
+        private System.Windows.Forms.RadioButton radioSSX;
         private System.Windows.Forms.Button buttonIMP_P;
         private System.Windows.Forms.Button buttonNOT_P;
         private System.Windows.Forms.Button buttonOR_P;
@@ -2576,6 +2590,7 @@
         private System.Windows.Forms.Button buttonAddPlotWindow;
         private System.Windows.Forms.ToolStripMenuItem toolStripWASwitch;
         private System.Windows.Forms.ToolStripLabel toolStripWA;
+        private System.Windows.Forms.TextBox textSSX;
     }
 }
 

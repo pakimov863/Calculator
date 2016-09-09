@@ -175,7 +175,6 @@ namespace Calculator
                     buttonF_P.Enabled = true;
                     break;
                 case 10:
-                default:
                     toolStripSSMode.Text = "DEC";
                     radioSS10.Checked = true;
                     button00_P.Enabled = true;
@@ -196,16 +195,17 @@ namespace Calculator
                     buttonF_P.Enabled = false;
                     break;
                 case 8:
-                    toolStripSSMode.Text = "OCT";
-                    radioSS8.Checked = true;
-                    button00_P.Enabled = true;
-                    button01_P.Enabled = true;
-                    button02_P.Enabled = true;
-                    button03_P.Enabled = true;
-                    button04_P.Enabled = true;
-                    button05_P.Enabled = true;
-                    button06_P.Enabled = true;
-                    button07_P.Enabled = true;
+                default:
+                    toolStripSSMode.Text = (SSmode == 8) ? "OCT" : SSmode.ToString() + "S";
+                    radioSSX.Checked = true;
+                    button00_P.Enabled = false;
+                    button01_P.Enabled = false;
+                    button02_P.Enabled = false;
+                    button03_P.Enabled = false;
+                    button04_P.Enabled = false;
+                    button05_P.Enabled = false;
+                    button06_P.Enabled = false;
+                    button07_P.Enabled = false;
                     button08_P.Enabled = false;
                     button09_P.Enabled = false;
                     buttonA_P.Enabled = false;
@@ -214,6 +214,25 @@ namespace Calculator
                     buttonD_P.Enabled = false;
                     buttonE_P.Enabled = false;
                     buttonF_P.Enabled = false;
+                    if (SSmode > 2)
+                    {
+                        button00_P.Enabled = true;
+                        button01_P.Enabled = true;
+                        button02_P.Enabled = true;
+                    }
+                    if (SSmode > 3) button03_P.Enabled = true;
+                    if (SSmode > 4) button04_P.Enabled = true;
+                    if (SSmode > 5) button05_P.Enabled = true;
+                    if (SSmode > 6) button06_P.Enabled = true;
+                    if (SSmode > 7) button07_P.Enabled = true;
+                    if (SSmode > 8) button08_P.Enabled = true;
+                    if (SSmode > 9) button09_P.Enabled = true;
+                    if (SSmode > 10) buttonA_P.Enabled = true;
+                    if (SSmode > 11) buttonB_P.Enabled = true;
+                    if (SSmode > 12) buttonC_P.Enabled = true;
+                    if (SSmode > 13) buttonD_P.Enabled = true;
+                    if (SSmode > 14) buttonE_P.Enabled = true;
+                    if (SSmode > 15) buttonF_P.Enabled = true;   
                     break;
                 case 2:
                     toolStripSSMode.Text = "BIN";
@@ -735,31 +754,71 @@ namespace Calculator
 
         private void radioSS_CheckedChanged(object sender, EventArgs e)
         {
-            if (((RadioButton)sender).Checked)
+            if (sender is RadioButton) { if (!((RadioButton)sender).Checked) return; }
+            else return;
+            switch (((RadioButton)sender).Name)
             {
-                switch (((RadioButton)sender).Name)
-                {
-                    case "radioSS16":
-                    default:
-                        ScreenBox.Text = BinaryArithmetic.ConvertStringToSS(ScreenBox.Text, SSmode, 16);
-                        SSmode = 16;
-                        break;
-                    case "radioSS10":
-                        ScreenBox.Text = BinaryArithmetic.ConvertStringToSS(ScreenBox.Text, SSmode, 10);
-                        SSmode = 10;
-                        break;
-                    case "radioSS8":
-                        ScreenBox.Text = BinaryArithmetic.ConvertStringToSS(ScreenBox.Text, SSmode, 8);
-                        SSmode = 8;
-                        break;
-                    case "radioSS2":
-                        ScreenBox.Text = BinaryArithmetic.ConvertStringToSS(ScreenBox.Text, SSmode, 2);
-                        SSmode = 2;
-                        break;
-                }
-                ChangeSSTo(SSmode);
+                case "radioSS16":
+                default:
+                    textSSX.Enabled = false;
+                    ScreenBox.Text = BinaryArithmetic.ConvertStringToSS(ScreenBox.Text, SSmode, 16);
+                    SSmode = 16;
+                    break;
+                case "radioSS10":
+                    textSSX.Enabled = false;
+                    ScreenBox.Text = BinaryArithmetic.ConvertStringToSS(ScreenBox.Text, SSmode, 10);
+                    SSmode = 10;
+                    break;
+                case "radioSSX":
+                    textSSX.Enabled = true;
+                    short newSS;
+                    if (Int16.TryParse(textSSX.Text, out newSS))
+                    {
+                        if (newSS >= 2 && newSS <= 16)
+                        {
+                            textSSX.BackColor = SystemColors.Window;
+                            ScreenBox.Text = BinaryArithmetic.ConvertStringToSS(ScreenBox.Text, SSmode, newSS);
+                            SSmode = newSS;
+
+                            if (newSS == 2 || newSS == 10 || newSS == 16) textSSX.Text = "8";
+                        }
+                        else
+                        {
+                            textSSX.BackColor = Color.LightCoral;
+                        }
+                    }
+                    else
+                    {
+                        textSSX.BackColor = Color.LightCoral;
+                    }
+
+                    break;
+                case "radioSS2":
+                    textSSX.Enabled = false;
+                    ScreenBox.Text = BinaryArithmetic.ConvertStringToSS(ScreenBox.Text, SSmode, 2);
+                    SSmode = 2;
+                    break;
             }
+            ChangeSSTo(SSmode);
         }
+
+        private void textSSX_TextChanged(object sender, EventArgs e)
+        {
+            RadioButton rb = new RadioButton();
+            rb.Name = "radioSSX";
+            rb.Checked = true;
+            radioSS_CheckedChanged(rb, e);
+        }
+
+        private void textSSX_LostFocus(object sender, EventArgs e)
+        {
+            /*RadioButton rb = new RadioButton();
+            rb.Name = "radioSSX";
+            rb.Checked = true;
+            radioSS_CheckedChanged(rb, e);*/
+        }
+
+        
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -897,6 +956,5 @@ namespace Calculator
             }
             checkBoxMode_CheckedChanged(sender, e);
         }
-  
     }
 }

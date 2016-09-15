@@ -181,46 +181,18 @@ namespace Calculator
 
         #endregion
 
-        #region Конвертеры: 2,8,16->10 + 10->2,8,16 + конвертация выражения
-        private delegate string ConvertAction(string inputstring);
+        #region Конвертеры: X->10 + 10->X + конвертация выражения
+        /// <summary>
+        /// Конвертация строки в различные системы счисления
+        /// </summary>
+        /// <param name="inputstring">Исходная строка</param>
+        /// <param name="fromss">Система, из которой переводим</param>
+        /// <param name="toss">Система, в которую переводим</param>
+        /// <returns></returns>
         public static string ConvertStringToSS(string inputstring, int fromss, int toss)
         {
-            //Определение делегата конвертации
-            ConvertAction ca = null;
-            if(fromss == 16)
-            {
-                if (toss == 16) return inputstring;
-                if (toss == 10) ca = ConvertFrom16To10;
-                if (toss == 8) ca = ConvertFrom16To8;
-                if (toss == 2) ca = ConvertFrom16To2;
-            }
-            else if(fromss == 10)
-            {
-                if (toss == 16) ca = ConvertFrom10To16;
-                if (toss == 10) return inputstring;
-                if (toss == 8) ca = ConvertFrom10To8;
-                if (toss == 2) ca = ConvertFrom10To2;
-            }
-            else if(fromss == 8)
-            {
-                if (toss == 16) ca = ConvertFrom8To16;
-                if (toss == 10) ca = ConvertFrom8To10;
-                if (toss == 8) return inputstring;
-                if (toss == 2) ca = ConvertFrom8To2;
-            }
-            else if(fromss == 2)
-            {
-                if (toss == 16) ca = ConvertFrom2To16;
-                if (toss == 10) ca = ConvertFrom2To10;
-                if (toss == 8) ca = ConvertFrom2To8;
-                if (toss == 2) return inputstring;
-            }
-            else if (fromss > 2 && fromss < 16 && toss > 2 && toss < 16)
-            {
-                if (fromss == toss) return inputstring;
-                else ca = null;
-            }
-            else return "ERR";
+            if (fromss == toss) return inputstring;
+            if (fromss < 2 && fromss > 16 && toss < 2 && toss > 16) return "ERR";
 
             MatchCollection collection = Regex.Matches(inputstring, @"\(|\)|[A-F]|[0-9]|\,|\+|\-|\*|\/");
 
@@ -252,8 +224,7 @@ namespace Calculator
                 {
                     if (fl)
                     {
-                        if (ca == null) resultstring += ConvertFrom10ToX(ConvertFromXTo10(t_str, fromss), toss);
-                        else resultstring += ca(t_str);
+                        resultstring += ConvertFrom10ToX(ConvertFromXTo10(t_str, fromss), toss);
                         t_str = "";
                         fl = false;
                     }
@@ -265,8 +236,7 @@ namespace Calculator
             
             if (fl)
             {
-                if (ca == null) resultstring += ConvertFrom10ToX(ConvertFromXTo10(t_str, fromss), toss);
-                else resultstring += ca(t_str);
+                resultstring += ConvertFrom10ToX(ConvertFromXTo10(t_str, fromss), toss);
                 t_str = "";
                 fl = false;
             }
@@ -274,250 +244,114 @@ namespace Calculator
             return resultstring;
         }
 
-        // Основные
-        public static string ConvertFrom2To10(string inputstring)
-        {
-            int result = 0;
-            int k = inputstring.Length - 1;
-            for (int i = 0; i < inputstring.Length; i++)
-            {
-                result += Convert.ToInt32(Char.GetNumericValue(inputstring[i])) * Convert.ToInt32(Math.Pow(2, k--)); //k-- --k
-            }
-            return Convert.ToString(result);
-        }
-
-        public static string ConvertFrom8To10(string inputstring)
-        {
-            double result = 0;
-            int k = inputstring.Length - 1;
-            for (int i = 0; i < inputstring.Length; i++)
-            {
-                result += Convert.ToInt32(Char.GetNumericValue(inputstring[i])) * Math.Pow(8, k--);
-            }
-            return Convert.ToString(result);
-        }
-
-        public static string ConvertFrom16To10(string inputstring)
-        {
-            double result = 0;
-            int k = inputstring.Length - 1;
-            for (int i = 0; i < inputstring.Length; i++)
-            {
-                switch (inputstring[i])
-                {
-                    case '0':
-                    case '1':
-                    case '2':
-                    case '3':
-                    case '4':
-                    case '5':
-                    case '6':
-                    case '7':
-                    case '8':
-                    case '9':
-                        result += Convert.ToInt32(Char.GetNumericValue(inputstring[i])) * Math.Pow(16, k--);
-                        break;
-                    case 'A':
-                        result += 10 * Math.Pow(16, k--);
-                        break;
-                    case 'B':
-                        result += 11 * Math.Pow(16, k--);
-                        break;
-                    case 'C':
-                        result += 12 * Math.Pow(16, k--);
-                        break;
-                    case 'D':
-                        result += 13 * Math.Pow(16, k--);
-                        break;
-                    case 'E':
-                        result += 14 * Math.Pow(16, k--);
-                        break;
-                    case 'F':
-                        result += 15 * Math.Pow(16, k--);
-                        break;
-                }
-            }
-            return Convert.ToString(result);
-        }
-
-        public static string ConvertFrom10To2(string inputstring)
-        {
-            string result = "";
-            int inputnumber = Convert.ToInt32(inputstring);
-
-            while (inputnumber != 0 && inputnumber != 1)
-            {
-                result = Convert.ToString((inputnumber % 2)) + result;
-                inputnumber = Convert.ToInt32(Math.Truncate(Convert.ToDouble(inputnumber / 2)));
-            }
-
-            result = inputnumber + result;
-
-            while (result.Length % 4 !=0)
-            {
-                result = "0" + result;
-            }
-            return Convert.ToString(result);
-        }
-
-        public static string ConvertFrom10To8(string inputstring)
-        {
-            string result = "";
-            int inputnumber = Convert.ToInt32(inputstring);
-
-            while (Math.Abs(inputnumber) > 7)
-            {
-                result = Convert.ToString((inputnumber % 8)) + result;
-                inputnumber = Convert.ToInt32(Math.Truncate(Convert.ToDouble(inputnumber / 8)));
-            }
-
-            return Convert.ToString(inputnumber + result);
-        }
-
-        public static string ConvertFrom10To16(string inputstring)
-        {
-            string result = "";
-            int inputnumber = Convert.ToInt32(inputstring);
-
-            while (Math.Abs(inputnumber) > 16)
-            {
-                switch (Convert.ToString((inputnumber % 16)))
-                {
-                    case "0":
-                    case "1":
-                    case "2":
-                    case "3":
-                    case "4":
-                    case "5":
-                    case "6":
-                    case "7":
-                    case "8":
-                    case "9":
-                        result = Convert.ToString((inputnumber % 16)) + result;
-                        break;
-                    case "10":
-                        result = "A" + result;
-                        break;
-                    case "11":
-                        result = "B" + result;
-                        break;
-                    case "12":
-                        result = "C" + result;
-                        break;
-                    case "13":
-                        result = "D" + result;
-                        break;
-                    case "14":
-                        result = "E" + result;
-                        break;
-                    case "15":
-                        result = "F" + result;
-                        break;
-                }
-                inputnumber = Convert.ToInt32(Math.Truncate(Convert.ToDouble(inputnumber / 16)));
-            }
-
-            switch (Convert.ToString(inputnumber))
-            {
-                case "0":
-                case "1":
-                case "2":
-                case "3":
-                case "4":
-                case "5":
-                case "6":
-                case "7":
-                case "8":
-                case "9":
-                    result = Convert.ToString(inputnumber) + result;
-                    break;
-                case "10":
-                    result = "A" + result;
-                    break;
-                case "11":
-                    result = "B" + result;
-                    break;
-                case "12":
-                    result = "C" + result;
-                    break;
-                case "13":
-                    result = "D" + result;
-                    break;
-                case "14":
-                    result = "E" + result;
-                    break;
-                case "15":
-                    result = "F" + result;
-                    break;
-            }
-            return Convert.ToString(result);
-        }
-
-        // Дополнительно
-        public static string ConvertFrom16To8(string inputstring)
-        {
-            return ConvertFrom10To8(ConvertFrom16To10(inputstring));
-        }
-        
-        public static string ConvertFrom16To2(string inputstring)
-        {
-            return ConvertFrom10To2(ConvertFrom16To10(inputstring));
-        }
-        
-        public static string ConvertFrom8To16(string inputstring)
-        {
-            return ConvertFrom10To16(ConvertFrom8To10(inputstring));
-        }
-        
-        public static string ConvertFrom8To2(string inputstring)
-        {
-            return ConvertFrom10To2(ConvertFrom8To10(inputstring));
-        }
-        
-        public static string ConvertFrom2To16(string inputstring)
-        {
-            return ConvertFrom10To16(ConvertFrom2To10(inputstring));
-        }
-        
-        public static string ConvertFrom2To8(string inputstring)
-        {
-            return ConvertFrom10To8(ConvertFrom2To10(inputstring));
-        }
-        
-        public static string ConvertNoSS(string inputstring)
-        {
-            return inputstring;
-        }
-        
-        // Конвертирование Из-В произвольные системы счисления
-
+        /// <summary>
+        /// Перевод из произвольной системы счисления в 10
+        /// </summary>
+        /// <param name="inputstring">Исходная строка</param>
+        /// <param name="x">Система счисления</param>
+        /// <returns></returns>
         public static string ConvertFromXTo10(string inputstring, int x)
         {
             if (x < 2 || x > 16) return "ERR";
+            if (x == 10) return inputstring;
 
             double result = 0;
-            int k = inputstring.Length - 1;
+            int k;
+            if (!inputstring.Contains(',')) k = inputstring.Length - 1;
+            else k = inputstring.IndexOf(',') - 1;
+
             for (int i = 0; i < inputstring.Length; i++)
             {
-                result += Convert.ToInt32(Char.GetNumericValue(inputstring[i])) * Math.Pow(x, k--);
+                if (inputstring[i] == ',') continue;
+                double tvar;
+                if (inputstring[i] == 'A') tvar = 10;
+                else if (inputstring[i] == 'B') tvar = 11;
+                else if (inputstring[i] == 'C') tvar = 12;
+                else if (inputstring[i] == 'D') tvar = 13;
+                else if (inputstring[i] == 'E') tvar = 14;
+                else if (inputstring[i] == 'F') tvar = 15;
+                else tvar = Convert.ToDouble(Char.GetNumericValue(inputstring[i]));
+                tvar *= Math.Pow(x, k--);
+                result += tvar;
             }
             return Convert.ToString(result);
         }
 
+        /// <summary>
+        /// Перевод из 10 в произвольную систему счисления
+        /// </summary>
+        /// <param name="inputstring">Исходная строка</param>
+        /// <param name="x">Система счисления</param>
+        /// <returns></returns>
         public static string ConvertFrom10ToX(string inputstring, int x)
         {
             if (x < 2 || x > 16) return "ERR";
+            if (x == 10) return inputstring;
 
             string result = "";
-            int inputnumber = Convert.ToInt32(inputstring);
+            double inputnumber_c = Math.Truncate(Convert.ToDouble(inputstring));
+            double inputnumber_d = Convert.ToDouble(inputstring) - inputnumber_c;
 
-            while (Math.Abs(inputnumber) > x-1)
+            if (Math.Abs(inputnumber_c) > x - 1)
+            {
+                while (Math.Abs(inputnumber_c) > x - 1)
+                {
+                    int tvar = Convert.ToInt32(inputnumber_c % x);
+                    if (tvar == 10) result = "A" + result;
+                    else if (tvar == 11) result = "B" + result;
+                    else if (tvar == 12) result = "C" + result;
+                    else if (tvar == 13) result = "D" + result;
+                    else if (tvar == 14) result = "E" + result;
+                    else if (tvar == 15) result = "F" + result;
+                    else result = tvar.ToString() +result;
+
+                    inputnumber_c = Math.Truncate(Convert.ToDouble(inputnumber_c / x));
+                }
+                if (inputnumber_c == 10) result = "A" + result;
+                else if (inputnumber_c == 11) result = "B" + result;
+                else if (inputnumber_c == 12) result = "C" + result;
+                else if (inputnumber_c == 13) result = "D" + result;
+                else if (inputnumber_c == 14) result = "E" + result;
+                else if (inputnumber_c == 15) result = "F" + result;
+                else result = inputnumber_c.ToString() + result;
+            }
+            else
+            {
+                if (inputnumber_c == 10) result = "A";// + result;
+                else if (inputnumber_c == 11) result = "B";// + result;
+                else if (inputnumber_c == 12) result = "C";// + result;
+                else if (inputnumber_c == 13) result = "D";// + result;
+                else if (inputnumber_c == 14) result = "E";// + result;
+                else if (inputnumber_c == 15) result = "F";// + result;
+                else result = Convert.ToString(inputnumber_c);
+            }
+
+            if (inputnumber_d != 0)
+            {
+                result += ",";
+
+                for (int i = 0; i < 8; i++)
+                {
+                    inputnumber_d *= x;
+                    int tvar = Convert.ToInt32(Math.Truncate(inputnumber_d));
+                    if (tvar == 10) result += "A";
+                    else if (tvar == 11) result += "B";
+                    else if (tvar == 12) result += "C";
+                    else if (tvar == 13) result += "D";
+                    else if (tvar == 14) result += "E";
+                    else if (tvar == 15) result += "F";
+                    else result += tvar.ToString();
+
+                    inputnumber_d -= Math.Truncate(inputnumber_d);
+                }
+            }
+            /*while (Math.Abs(inputnumber) > x-1)
             {
                 result = Convert.ToString((inputnumber % x)) + result;
                 inputnumber = Convert.ToInt32(Math.Truncate(Convert.ToDouble(inputnumber / x)));
-            }
+            }*/
 
-            return Convert.ToString(inputnumber + result);
+            return result;
         }
         #endregion
     }

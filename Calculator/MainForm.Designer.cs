@@ -2004,7 +2004,6 @@
             // 
             // buttonPoint_P
             // 
-            this.buttonPoint_P.Enabled = false;
             this.buttonPoint_P.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonPoint_P.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.buttonPoint_P.Location = new System.Drawing.Point(192, 195);

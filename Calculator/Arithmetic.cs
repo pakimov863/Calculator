@@ -122,7 +122,7 @@ namespace Calculator
             //(\-?\d+(\.\d{0,})?)
             Regex operations = new Regex(@"\+|\-|_|\*|\/|\^|⋮|⋯|⋰|⋱|SQRT|QBRT|XQRT|ASIN|SINH|SIN|ACOS|COSH|COS|ATG|TGH|TG|ACTG|CTGH|CTG|LN|LG|LOG|EXP|\!");
             Regex brackets = new Regex(@"\(|\)");
-            string[] priority = { "SQRT", "QBRT", "XQRT", "ASIN", "SINH", "SIN", "ACOS", "COSH", "COS", "ATG", "TGH", "TG", "ACTG", "CTGH", "CTG", "LN", "LG", "LOG", "EXP", "!", "^", "⋰", "⋱", "⋯", "⋮", "*", "/", "-", "+", "_" };//⋮=+%, ⋯=-%, ⋰=*%, ⋱=/%
+            string[] priority = { "SQRT", "QBRT", "XQRT", "ASIN", "SINH", "SIN", "ACOS", "COSH", "COS", "ATG", "TGH", "TG", "ACTG", "CTGH", "CTG", "LN", "LG", "LOG", "EXP", "_", "!", "^", "⋰", "⋱", "⋯", "⋮", "*", "/", "-", "+" };//⋮=+%, ⋯=-%, ⋰=*%, ⋱=/%
 
             Stack<string> stack = new Stack<string>();
             List<Token> list = new List<Token>();
@@ -156,7 +156,7 @@ namespace Calculator
                 if (temp.Success)
                 {
                     string tempValue = temp.Value;
-                    if (operleft && tempValue == "-") tempValue = "_";
+                    if (operleft && tempValue == "-") { list.Add(new Token("-1", TokenType.Variable)); tempValue = "*"; }
                     operleft = true;
 
                     if (stack.Count != 0)

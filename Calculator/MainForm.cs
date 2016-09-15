@@ -67,7 +67,7 @@ namespace Calculator
 
         private void PreProcess(ref string str)
         {
-            //str = "(" + str.ToUpper() + ")";
+            str = str.ToUpper();
             str = str.Replace("PI", Convert.ToString(Math.PI));
             //str = str.Replace("E", Convert.ToString(Math.E));
 
@@ -105,6 +105,17 @@ namespace Calculator
                 str = str.Replace("/%", "⋱");
             }
 
+            if(str.Contains("^"))
+            {
+                string[] t_str = str.Split('^');
+                string r_str = t_str[0];
+                for (int i = 1; i < t_str.Length; i++)
+                {
+                    if(t_str[i].StartsWith("-")) t_str[i] = "_" + t_str[i].Substring(1);
+                    r_str += t_str[i];
+                }
+            }
+
             /*string symbols = "+|-|*|/|^|⋮|⋯|⋰|⋱|SQRT|QBRT|XQRT|ASIN|SINH|SIN|ACOS|COSH|COS|ATG|TGH|TG|ACTG|CTGH|CTG|LN|LG|LOG|EXP|!";
             if (str.Contains("-"))
             {
@@ -138,8 +149,6 @@ namespace Calculator
                 str = tmp;
             }*/
             str = str.Replace(".", ",");
-            
-            //if(str.StartsWith("+")) str.
         }
 
         private string PostProcess(Double str)

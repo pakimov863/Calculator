@@ -49,24 +49,6 @@
   <ItemGroup>
     <Compile Include="Arithmetic.cs" />
     <Compile Include="BinaryArithmetic.cs" />
-    <Compile Include="HistoryTile.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="HistoryTile.Designer.cs">
-      <DependentUpon>HistoryTile.cs</DependentUpon>
-    </Compile>
-    <Compile Include="HistoryWindow.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="HistoryWindow.Designer.cs">
-      <DependentUpon>HistoryWindow.cs</DependentUpon>
-    </Compile>
-    <Compile Include="InputScreen.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="InputScreen.Designer.cs">
-      <DependentUpon>InputScreen.cs</DependentUpon>
-    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,15 +98,6 @@
     <Compile Include="WolframAPI\WolframPod.Designer.cs">
       <DependentUpon>WolframPod.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="HistoryTile.resx">
-      <DependentUpon>HistoryTile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="HistoryWindow.resx">
-      <DependentUpon>HistoryWindow.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="InputScreen.resx">
-      <DependentUpon>InputScreen.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

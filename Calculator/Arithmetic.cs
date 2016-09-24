@@ -6,7 +6,7 @@ namespace Calculator
 {
     /// <summary>
     /// Класс работы с обычными математическими выражениями.
-    /// Доступны операции: +, -, *, /, ^, SQRT(), QBRT(), ()XQRT(), ASIN(), SINH(), SIN(), ACOS(), COSH(), COS(), ATG(), TGH(), TG(), ACTG(), CTGH(), CTG(), LN(), LG(), ()LOG(), EXP(), !
+    /// Доступны операции: +, -, *, /, ^, SQRT(), QBRT(), ()XQRT(), ASIN(), SINH(), SIN(), ACOS(), COSH(), COS(), ATG(), TGH(), TG(), ACTG(), CTGH(), CTG(), LN(), LG(), ()LOG(), EXP(), ABS(), !
     /// </summary>
     static class Arithmetic
     {
@@ -117,12 +117,12 @@ namespace Calculator
         /// <returns>Список токенов в виде обратной польской записи</returns>
         public static List<Token> GetRPN(string expression)
         {
-            MatchCollection collection = Regex.Matches(expression, @"\(|\)|(\d+(((\.|,)\d+|)+e(\+|-)\d+|(\.|,)\d+|))|\+|\-|_|\*|\/|\^|⋮|⋯|⋰|⋱|SQRT|QBRT|XQRT|ASIN|SINH|SIN|ACOS|COSH|COS|ATG|TGH|TG|ACTG|CTGH|CTG|LN|LG|LOG|EXP|\!");
+            MatchCollection collection = Regex.Matches(expression, @"\(|\)|(\d+(((\.|,)\d+|)+e(\+|-)\d+|(\.|,)\d+|))|\+|\-|_|\*|\/|\^|⋮|⋯|⋰|⋱|SQRT|QBRT|XQRT|ASIN|SINH|SIN|ACOS|COSH|COS|ATG|TGH|TG|ACTG|CTGH|CTG|LN|LG|LOG|EXP|\!|ABS");
             Regex variables = new Regex(@"\d+(((\.|,)\d+|)+e(\+|-)\d+|(\.|,)\d+|)");
             //(\-?\d+(\.\d{0,})?)
-            Regex operations = new Regex(@"\+|\-|_|\*|\/|\^|⋮|⋯|⋰|⋱|SQRT|QBRT|XQRT|ASIN|SINH|SIN|ACOS|COSH|COS|ATG|TGH|TG|ACTG|CTGH|CTG|LN|LG|LOG|EXP|\!");
+            Regex operations = new Regex(@"\+|\-|_|\*|\/|\^|⋮|⋯|⋰|⋱|SQRT|QBRT|XQRT|ASIN|SINH|SIN|ACOS|COSH|COS|ATG|TGH|TG|ACTG|CTGH|CTG|LN|LG|LOG|EXP|\!|ABS");
             Regex brackets = new Regex(@"\(|\)");
-            string[] priority = { "SQRT", "QBRT", "XQRT", "ASIN", "SINH", "SIN", "ACOS", "COSH", "COS", "ATG", "TGH", "TG", "ACTG", "CTGH", "CTG", "LN", "LG", "LOG", "EXP", "_", "!", "^", "⋰", "⋱", "⋯", "⋮", "*", "/", "-", "+" };//⋮=+%, ⋯=-%, ⋰=*%, ⋱=/%
+            //string[] priority = { "SQRT", "QBRT", "XQRT", "ASIN", "SINH", "SIN", "ACOS", "COSH", "COS", "ATG", "TGH", "TG", "ACTG", "CTGH", "CTG", "LN", "LG", "LOG", "EXP", "_", "!", "^", "⋰", "⋱", "⋯", "⋮", "*", "/", "-", "+" };//⋮=+%, ⋯=-%, ⋰=*%, ⋱=/%
 
             Stack<string> stack = new Stack<string>();
             List<Token> list = new List<Token>();
@@ -161,7 +161,8 @@ namespace Calculator
 
                     if (stack.Count != 0)
                     {
-                        while (Array.IndexOf(priority, tempValue) >= Array.IndexOf(priority, stack.Peek()))
+                        //while (Array.IndexOf(priority, tempValue) >= Array.IndexOf(priority, stack.Peek()))
+                        while (GetPriority(tempValue) >= GetPriority(stack.Peek()))
                         {
                             if (stack.Peek() == "(") break;
                             list.Add(new Token(stack.Pop(), TokenType.Operation));
@@ -231,6 +232,10 @@ namespace Calculator
                             a = result.Pop();
                             b = result.Pop();
                             result.Push(Math.Pow(a, 1 / b));
+                            break;
+                        case "ABS":
+                            a = result.Pop();
+                            result.Push(Math.Abs(a));
                             break;
                         case "ASIN":
                             a = result.Pop();
@@ -410,13 +415,26 @@ namespace Calculator
                              + 0.00120858003 / (x + 4) - 0.00000536382 / (x + 5);
             return Math.Exp(tmp + Math.Log(ser * Math.Sqrt(2 * Math.PI)));
         }
-        /*private static double Factorial(double number)
+
+        /// <summary>
+        /// Возвращает приоритет операции
+        /// </summary>
+        /// <param name="value">Символ операции</param>
+        /// <returns>Число-приоритет</returns>
+        private static int GetPriority(string value)
         {
-            double num = number;
-            double result = 1;
-            for (double i = 1; i <= number; i++) result *= i;
-            return result;
-        }*/
+            Regex[] mainpriority = {
+                                    new Regex(@"SQRT|QBRT|XQRT|ASIN|SINH|SIN|ACOS|COSH|COS|ATG|TGH|TG|ACTG|CTGH|CTG|LN|LG|LOG|EXP|ABS"),
+                                    new Regex(@"_"),
+                                    new Regex(@"\^|\!"),
+                                    new Regex(@"⋮|⋯|⋰|⋱"),
+                                    new Regex(@"\*|\/"),
+                                    new Regex(@"\+|\-")
+                               };
+            for (int i = 0; i < mainpriority.Length - 1; i++)
+                if (mainpriority[i].Match(value).Success) return i;
+            return mainpriority.Length + 1;
+        }
 
         #endregion
     }

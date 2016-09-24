@@ -108,25 +108,15 @@ namespace Calculator
             if(str.Contains("^"))
             {
                 string[] t_str = str.Split('^');
-                string r_str = t_str[0];
                 for (int i = 1; i < t_str.Length; i++)
                 {
-                    if(t_str[i].StartsWith("-")) t_str[i] = "_" + t_str[i].Substring(1);
-                    r_str += t_str[i];
+                    if(t_str[i].StartsWith("-"))
+                        t_str[i] = "_" + t_str[i].Substring(1);
                 }
+                str = String.Join("^", t_str);
             }
 
-            /*string symbols = "+|-|*|/|^|⋮|⋯|⋰|⋱|SQRT|QBRT|XQRT|ASIN|SINH|SIN|ACOS|COSH|COS|ATG|TGH|TG|ACTG|CTGH|CTG|LN|LG|LOG|EXP|!";
-            if (str.Contains("-"))
-            {
-                string[] tstr = str.Split('-');
-                for (int i = 0; i < tstr.Length; i++)
-                {
-                    if(tstr[i] == "" || )
-                }
-            }*/
-
-            /*if(str.Contains("(") || str.Contains(")"))
+            if(str.Contains("(") || str.Contains(")"))
             {
                 int lbr = 0;
                 for(int i=0; i < str.Length; i++)
@@ -134,20 +124,9 @@ namespace Calculator
                     if (str[i] == '(') lbr++;
                     if (str[i] == ')') lbr--;
                 }
-                if (lbr != 0) str = "";
+                if (lbr != 0) str = "ERR";
             }
 
-            /*if (str.Contains("-"))
-            {
-                string[] str_mas = str.Split('-');
-                string tmp = str_mas[0];
-                for (int i = 0; i < str_mas.Length - 1; i++)
-                {//(15-4)-8
-                    if(!"0123456789)".Contains(str_mas.Last())) tmp += str_mas[i + 1];
-                    else tmp += "-" + str_mas[i + 1];
-                }
-                str = tmp;
-            }*/
             str = str.Replace(".", ",");
         }
 

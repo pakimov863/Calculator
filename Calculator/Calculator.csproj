@@ -75,7 +75,6 @@
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Token.cs" />
-    <Compile Include="TokenType.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="WolframAPI\WolframAlphaAssumption.cs" />
     <Compile Include="WolframAPI\WolframAlphaEngine.cs" />

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Calculator
 {
-    struct Token
+    class Token
     {
         private string value;
         private TokenType type;
@@ -18,5 +18,11 @@ namespace Calculator
             this.value = value;
             this.type = type;
         }
+    }
+
+    public enum TokenType
+    {
+        Variable,
+        Operation
     }
 }

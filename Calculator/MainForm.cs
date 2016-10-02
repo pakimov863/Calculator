@@ -23,9 +23,10 @@ namespace Calculator
         public byte gradusmode = 0;
         public int SSmode = 10;
         public double plotmultiplier = 1;
+        public int pointsymbols = 5;
         public bool allowwolfram = false;
         public PlotForm plotter;
-
+        
         public MainForm()
         {
             InitializeComponent();
@@ -134,7 +135,7 @@ namespace Calculator
         {
             if (Double.IsNaN(str)) return "NaN";
             if (Double.IsInfinity(str)) return "Inf";
-            Double result = Math.Round(str, 5);
+            Double result = Math.Round(str, pointsymbols);
             return Convert.ToString(result);
         }
 

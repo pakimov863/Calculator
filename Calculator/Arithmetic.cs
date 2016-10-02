@@ -117,10 +117,10 @@ namespace Calculator
         /// <returns>Список токенов в виде обратной польской записи</returns>
         public static List<Token> GetRPN(string expression)
         {
-            MatchCollection collection = Regex.Matches(expression, @"\(|\)|(\d+(((\.|,)\d+|)+e(\+|-)\d+|(\.|,)\d+|))|\+|\-|_|\*|\/|\^|⋮|⋯|⋰|⋱|SQRT|QBRT|XQRT|ASIN|SINH|SIN|ACOS|COSH|COS|ATG|TGH|TG|ACTG|CTGH|CTG|LN|LG|LOG|EXP|\!|ABS");
+            MatchCollection collection = Regex.Matches(expression, @"\(|\)|(\d+(((\.|,)\d+|)+e(\+|-)\d+|(\.|,)\d+|))|\+|\-|_|\*|\/|\^|⋮|⋯|⋰|⋱|SQRT|QBRT|XQRT|ASIN|SINH|SIN|ACOS|COSH|COS|ATG|TGH|TG|ACTG|CTGH|CTG|LN|LG|LOG|EXP|\!|ABS|·");
             Regex variables = new Regex(@"\d+(((\.|,)\d+|)+e(\+|-)\d+|(\.|,)\d+|)");
             //(\-?\d+(\.\d{0,})?)
-            Regex operations = new Regex(@"\+|\-|_|\*|\/|\^|⋮|⋯|⋰|⋱|SQRT|QBRT|XQRT|ASIN|SINH|SIN|ACOS|COSH|COS|ATG|TGH|TG|ACTG|CTGH|CTG|LN|LG|LOG|EXP|\!|ABS");
+            Regex operations = new Regex(@"\+|\-|_|\*|\/|\^|⋮|⋯|⋰|⋱|SQRT|QBRT|XQRT|ASIN|SINH|SIN|ACOS|COSH|COS|ATG|TGH|TG|ACTG|CTGH|CTG|LN|LG|LOG|EXP|\!|ABS|·");
             Regex brackets = new Regex(@"\(|\)");
             //string[] priority = { "SQRT", "QBRT", "XQRT", "ASIN", "SINH", "SIN", "ACOS", "COSH", "COS", "ATG", "TGH", "TG", "ACTG", "CTGH", "CTG", "LN", "LG", "LOG", "EXP", "_", "!", "^", "⋰", "⋱", "⋯", "⋮", "*", "/", "-", "+" };//⋮=+%, ⋯=-%, ⋰=*%, ⋱=/%
 
@@ -156,7 +156,7 @@ namespace Calculator
                 if (temp.Success)
                 {
                     string tempValue = temp.Value;
-                    if (operleft && tempValue == "-") { list.Add(new Token("-1", TokenType.Variable)); tempValue = "*"; }
+                    if (operleft && tempValue == "-") { list.Add(new Token("-1", TokenType.Variable)); tempValue = "·"; }
                     operleft = true;
 
                     if (stack.Count != 0)
@@ -357,6 +357,7 @@ namespace Calculator
                             result.Push(- a);
                             break;
                         case "*":
+                        case "·":
                             a = result.Pop();
                             b = result.Pop();
                             result.Push(b * a);
@@ -426,6 +427,7 @@ namespace Calculator
             Regex[] mainpriority = {
                                     new Regex(@"SQRT|QBRT|XQRT|ASIN|SINH|SIN|ACOS|COSH|COS|ATG|TGH|TG|ACTG|CTGH|CTG|LN|LG|LOG|EXP|ABS"),
                                     new Regex(@"_"),
+                                    new Regex(@"·"),
                                     new Regex(@"\^|\!"),
                                     new Regex(@"⋮|⋯|⋰|⋱"),
                                     new Regex(@"\*|\/"),

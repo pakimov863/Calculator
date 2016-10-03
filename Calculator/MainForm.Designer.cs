@@ -116,15 +116,11 @@
             this.button08_M = new System.Windows.Forms.Button();
             this.button09_M = new System.Windows.Forms.Button();
             this.button00_M = new System.Windows.Forms.Button();
-            this.buttonAddCol_M = new System.Windows.Forms.Button();
             this.buttonBack_M = new System.Windows.Forms.Button();
             this.buttonClr_M = new System.Windows.Forms.Button();
             this.buttonTr_M = new System.Windows.Forms.Button();
             this.buttonInv_M = new System.Windows.Forms.Button();
             this.buttonDet_M = new System.Windows.Forms.Button();
-            this.buttonDelCol_M = new System.Windows.Forms.Button();
-            this.buttonAddLine_M = new System.Windows.Forms.Button();
-            this.buttonDelLine_M = new System.Windows.Forms.Button();
             this.buttonStep_M = new System.Windows.Forms.Button();
             this.panelMatrix = new System.Windows.Forms.Panel();
             this.panelNormal = new System.Windows.Forms.Panel();
@@ -1057,15 +1053,15 @@
             // 
             // buttonNewMatr_M
             // 
-            this.buttonNewMatr_M.Enabled = false;
             this.buttonNewMatr_M.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonNewMatr_M.ForeColor = System.Drawing.Color.MediumVioletRed;
-            this.buttonNewMatr_M.Location = new System.Drawing.Point(192, 0);
+            this.buttonNewMatr_M.Location = new System.Drawing.Point(267, 0);
             this.buttonNewMatr_M.Name = "buttonNewMatr_M";
             this.buttonNewMatr_M.Size = new System.Drawing.Size(45, 73);
             this.buttonNewMatr_M.TabIndex = 60;
-            this.buttonNewMatr_M.Text = "[ ]";
+            this.buttonNewMatr_M.Text = "[+]";
             this.buttonNewMatr_M.UseVisualStyleBackColor = true;
+            this.buttonNewMatr_M.Click += new System.EventHandler(this.buttonNewMatr_M_Click);
             // 
             // buttonMul_M
             // 
@@ -1259,18 +1255,6 @@
             this.button00_M.UseVisualStyleBackColor = true;
             this.button00_M.Click += new System.EventHandler(this.buttonDigit_Click);
             // 
-            // buttonAddCol_M
-            // 
-            this.buttonAddCol_M.Enabled = false;
-            this.buttonAddCol_M.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonAddCol_M.ForeColor = System.Drawing.Color.MediumVioletRed;
-            this.buttonAddCol_M.Location = new System.Drawing.Point(243, 0);
-            this.buttonAddCol_M.Name = "buttonAddCol_M";
-            this.buttonAddCol_M.Size = new System.Drawing.Size(45, 35);
-            this.buttonAddCol_M.TabIndex = 81;
-            this.buttonAddCol_M.Text = "+Sto";
-            this.buttonAddCol_M.UseVisualStyleBackColor = true;
-            // 
             // buttonBack_M
             // 
             this.buttonBack_M.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -1299,7 +1283,7 @@
             // 
             this.buttonTr_M.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonTr_M.ForeColor = System.Drawing.Color.MediumVioletRed;
-            this.buttonTr_M.Location = new System.Drawing.Point(48, 0);
+            this.buttonTr_M.Location = new System.Drawing.Point(48, 19);
             this.buttonTr_M.Name = "buttonTr_M";
             this.buttonTr_M.Size = new System.Drawing.Size(45, 35);
             this.buttonTr_M.TabIndex = 84;
@@ -1311,7 +1295,7 @@
             // 
             this.buttonInv_M.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonInv_M.ForeColor = System.Drawing.Color.MediumVioletRed;
-            this.buttonInv_M.Location = new System.Drawing.Point(96, 0);
+            this.buttonInv_M.Location = new System.Drawing.Point(144, 19);
             this.buttonInv_M.Name = "buttonInv_M";
             this.buttonInv_M.Size = new System.Drawing.Size(45, 35);
             this.buttonInv_M.TabIndex = 85;
@@ -1323,7 +1307,7 @@
             // 
             this.buttonDet_M.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonDet_M.ForeColor = System.Drawing.Color.MediumVioletRed;
-            this.buttonDet_M.Location = new System.Drawing.Point(144, 0);
+            this.buttonDet_M.Location = new System.Drawing.Point(96, 19);
             this.buttonDet_M.Name = "buttonDet_M";
             this.buttonDet_M.Size = new System.Drawing.Size(45, 35);
             this.buttonDet_M.TabIndex = 86;
@@ -1331,47 +1315,11 @@
             this.buttonDet_M.UseVisualStyleBackColor = true;
             this.buttonDet_M.Click += new System.EventHandler(this.buttonFunct_Click);
             // 
-            // buttonDelCol_M
-            // 
-            this.buttonDelCol_M.Enabled = false;
-            this.buttonDelCol_M.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonDelCol_M.ForeColor = System.Drawing.Color.MediumVioletRed;
-            this.buttonDelCol_M.Location = new System.Drawing.Point(243, 38);
-            this.buttonDelCol_M.Name = "buttonDelCol_M";
-            this.buttonDelCol_M.Size = new System.Drawing.Size(45, 35);
-            this.buttonDelCol_M.TabIndex = 87;
-            this.buttonDelCol_M.Text = "-Sto";
-            this.buttonDelCol_M.UseVisualStyleBackColor = true;
-            // 
-            // buttonAddLine_M
-            // 
-            this.buttonAddLine_M.Enabled = false;
-            this.buttonAddLine_M.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonAddLine_M.ForeColor = System.Drawing.Color.MediumVioletRed;
-            this.buttonAddLine_M.Location = new System.Drawing.Point(291, 0);
-            this.buttonAddLine_M.Name = "buttonAddLine_M";
-            this.buttonAddLine_M.Size = new System.Drawing.Size(45, 35);
-            this.buttonAddLine_M.TabIndex = 88;
-            this.buttonAddLine_M.Text = "+Str";
-            this.buttonAddLine_M.UseVisualStyleBackColor = true;
-            // 
-            // buttonDelLine_M
-            // 
-            this.buttonDelLine_M.Enabled = false;
-            this.buttonDelLine_M.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonDelLine_M.ForeColor = System.Drawing.Color.MediumVioletRed;
-            this.buttonDelLine_M.Location = new System.Drawing.Point(291, 38);
-            this.buttonDelLine_M.Name = "buttonDelLine_M";
-            this.buttonDelLine_M.Size = new System.Drawing.Size(45, 35);
-            this.buttonDelLine_M.TabIndex = 89;
-            this.buttonDelLine_M.Text = "-Str";
-            this.buttonDelLine_M.UseVisualStyleBackColor = true;
-            // 
             // buttonStep_M
             // 
             this.buttonStep_M.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonStep_M.ForeColor = System.Drawing.Color.MediumVioletRed;
-            this.buttonStep_M.Location = new System.Drawing.Point(96, 38);
+            this.buttonStep_M.Location = new System.Drawing.Point(192, 19);
             this.buttonStep_M.Name = "buttonStep_M";
             this.buttonStep_M.Size = new System.Drawing.Size(45, 35);
             this.buttonStep_M.TabIndex = 90;
@@ -1381,16 +1329,13 @@
             // 
             // panelMatrix
             // 
+            this.panelMatrix.Controls.Add(this.buttonNewMatr_M);
             this.panelMatrix.Controls.Add(this.buttonStep_M);
-            this.panelMatrix.Controls.Add(this.buttonDelLine_M);
-            this.panelMatrix.Controls.Add(this.buttonAddLine_M);
-            this.panelMatrix.Controls.Add(this.buttonDelCol_M);
             this.panelMatrix.Controls.Add(this.buttonDet_M);
             this.panelMatrix.Controls.Add(this.buttonInv_M);
             this.panelMatrix.Controls.Add(this.buttonTr_M);
             this.panelMatrix.Controls.Add(this.buttonClr_M);
             this.panelMatrix.Controls.Add(this.buttonBack_M);
-            this.panelMatrix.Controls.Add(this.buttonAddCol_M);
             this.panelMatrix.Controls.Add(this.button00_M);
             this.panelMatrix.Controls.Add(this.button09_M);
             this.panelMatrix.Controls.Add(this.button08_M);
@@ -1407,7 +1352,6 @@
             this.panelMatrix.Controls.Add(this.buttonMinus_M);
             this.panelMatrix.Controls.Add(this.buttonDiv_M);
             this.panelMatrix.Controls.Add(this.buttonMul_M);
-            this.panelMatrix.Controls.Add(this.buttonNewMatr_M);
             this.panelMatrix.Controls.Add(this.buttonRbr_M);
             this.panelMatrix.Controls.Add(this.buttonLbr_M);
             this.panelMatrix.Location = new System.Drawing.Point(22, 177);
@@ -1770,7 +1714,6 @@
             this.textSSX.TabIndex = 4;
             this.textSSX.Text = "8";
             this.textSSX.TextChanged += new System.EventHandler(this.textSSX_TextChanged);
-            this.textSSX.LostFocus += new System.EventHandler(this.textSSX_LostFocus);
             // 
             // radioSS2
             // 
@@ -2380,13 +2323,13 @@
             this.Controls.Add(this.panelProgram);
             this.Controls.Add(this.panelSS);
             this.Controls.Add(this.panelNormal);
-            this.Controls.Add(this.panelMatrix);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.buttonHistory);
             this.Controls.Add(this.panelModes);
             this.Controls.Add(this.panelGrad);
             this.Controls.Add(this.HistoryBox1);
             this.Controls.Add(this.ScreenBox);
+            this.Controls.Add(this.panelMatrix);
             this.Controls.Add(this.panelEngeneer);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -2497,15 +2440,11 @@
         private System.Windows.Forms.Button button08_M;
         private System.Windows.Forms.Button button09_M;
         private System.Windows.Forms.Button button00_M;
-        private System.Windows.Forms.Button buttonAddCol_M;
         private System.Windows.Forms.Button buttonBack_M;
         private System.Windows.Forms.Button buttonClr_M;
         private System.Windows.Forms.Button buttonTr_M;
         private System.Windows.Forms.Button buttonInv_M;
         private System.Windows.Forms.Button buttonDet_M;
-        private System.Windows.Forms.Button buttonDelCol_M;
-        private System.Windows.Forms.Button buttonAddLine_M;
-        private System.Windows.Forms.Button buttonDelLine_M;
         private System.Windows.Forms.Button buttonStep_M;
         private System.Windows.Forms.Panel panelMatrix;
         private System.Windows.Forms.Panel panelNormal;

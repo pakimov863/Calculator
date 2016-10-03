@@ -26,6 +26,7 @@ namespace Calculator
         public int pointsymbols = 5;
         public bool allowwolfram = false;
         public PlotForm plotter;
+        public Dictionary<string, string> savedVariables;
         
         public MainForm()
         {
@@ -378,7 +379,7 @@ namespace Calculator
             {
                 ScreenBox.Text = ((Button)sender).Text + ScreenBox.Text.Substring(csel, ScreenBox.Text.Length - csel);
             }
-            csel += ((Button)sender).Text.Length ;
+            csel += ((Button)sender).Text.Length;
             ScreenBox.Focus();
             ScreenBox.Select(csel, 0);
             if (Properties.Settings.Default.AutoALT && checkBoxMode.Checked) checkBoxMode.Checked = false;
@@ -578,12 +579,13 @@ namespace Calculator
                             break;
                         case "matr":
                             //Вычисление на матричной панели
-                            Dictionary<string, string> mas = new Dictionary<string, string>();
-                            MatrixArithmetic.GetMatrixes(ref inpstr, ref mas);
+                            //Dictionary<string, string> mas = new Dictionary<string, string>();
+                            //MatrixArithmetic.GetMatrixes(ref inpstr, ref mas);
                             List<Token> RPN3 = MatrixArithmetic.GetRPN(inpstr);
-                            result = MatrixArithmetic.Calculate(RPN3, mas);
+                            //result = MatrixArithmetic.Calculate(RPN3, mas);
+                            result = MatrixArithmetic.Calculate(RPN3, savedVariables);
                             if (RPN3 != null) RPN3.Clear();
-                            mas.Clear();
+                            //mas.Clear();
                             break;
                     }
 
@@ -799,16 +801,6 @@ namespace Calculator
             radioSS_CheckedChanged(rb, e);
         }
 
-        private void textSSX_LostFocus(object sender, EventArgs e)
-        {
-            /*RadioButton rb = new RadioButton();
-            rb.Name = "radioSSX";
-            rb.Checked = true;
-            radioSS_CheckedChanged(rb, e);*/
-        }
-
-        
-
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             lx = e.X;
@@ -944,6 +936,28 @@ namespace Calculator
                 
             }
             checkBoxMode_CheckedChanged(sender, e);
+        }
+
+        private void buttonNewMatr_M_Click(object sender, EventArgs e)
+        {
+            if (savedVariables == null) savedVariables = new Dictionary<string, string>();
+            char i;
+            for (i = 'A'; i <= 'N'; i++) if (!savedVariables.ContainsKey(i.ToString())) break;
+            EditMatrix em = new EditMatrix(i);
+            string[] tmp;
+            if(DialogResult.OK == em.ShowDialog(this))
+            {
+                tmp = em.result.Split('#');
+                savedVariables.Add(tmp[0], tmp[1]);
+
+                if (HistoryBox1.Text == "") HistoryBox1.Text += tmp[0] + "=" + tmp[1];
+                else HistoryBox1.Text += "\r\n" + tmp[0] + "=" + tmp[1];
+
+                Button tbtn = new Button();
+                tbtn.Text = tmp[0];
+                buttonDigit_Click(tbtn, e);
+            }
+            ScreenBox.Focus();
         }
     }
 }

@@ -47,6 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EditMatrix.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditMatrix.Designer.cs">
+      <DependentUpon>EditMatrix.cs</DependentUpon>
+    </Compile>
     <Compile Include="Arithmetic.cs" />
     <Compile Include="BinaryArithmetic.cs" />
     <Compile Include="MainForm.cs">
@@ -97,6 +103,9 @@
     <Compile Include="WolframAPI\WolframPod.Designer.cs">
       <DependentUpon>WolframPod.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="EditMatrix.resx">
+      <DependentUpon>EditMatrix.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

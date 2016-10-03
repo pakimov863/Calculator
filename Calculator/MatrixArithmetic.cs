@@ -774,7 +774,7 @@ namespace Calculator
         /// </summary>
         /// <param name="matrix">Матрица для преобразования</param>
         /// <returns>Полученная строка</returns>
-        private static string WARetLine(string[,] matrix)
+        public static string WARetLine(string[,] matrix)
         {
             string result = "{";
 

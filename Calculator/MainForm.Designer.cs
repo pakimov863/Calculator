@@ -198,6 +198,7 @@
             this.buttonZoomMinus = new System.Windows.Forms.Button();
             this.buttonZoomPlus = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.toolStripVarSwitch = new System.Windows.Forms.ToolStripMenuItem();
             this.panelGrad.SuspendLayout();
             this.panelModes.SuspendLayout();
             this.panelEngeneer.SuspendLayout();
@@ -905,7 +906,8 @@
             this.toolStripMode5,
             this.toolStripSeparator1,
             this.toolStripModeSwitch,
-            this.toolStripWASwitch});
+            this.toolStripWASwitch,
+            this.toolStripVarSwitch});
             this.toolStripModes.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripModes.Name = "toolStripModes";
             this.toolStripModes.Size = new System.Drawing.Size(40, 22);
@@ -2314,6 +2316,16 @@
             this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
             this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
             // 
+            // toolStripVarSwitch
+            // 
+            this.toolStripVarSwitch.Checked = true;
+            this.toolStripVarSwitch.CheckOnClick = true;
+            this.toolStripVarSwitch.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.toolStripVarSwitch.Name = "toolStripVarSwitch";
+            this.toolStripVarSwitch.Size = new System.Drawing.Size(227, 22);
+            this.toolStripVarSwitch.Text = "Разрешить переменные";
+            this.toolStripVarSwitch.CheckStateChanged += new System.EventHandler(this.toolStripVarSwitch_CheckStateChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2529,6 +2541,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripWASwitch;
         private System.Windows.Forms.ToolStripLabel toolStripWA;
         private System.Windows.Forms.TextBox textSSX;
+        private System.Windows.Forms.ToolStripMenuItem toolStripVarSwitch;
     }
 }
 

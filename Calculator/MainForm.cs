@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using WolframAlphaAPI;
 
@@ -25,6 +26,7 @@ namespace Calculator
         public double plotmultiplier = 1;
         public int pointsymbols = 5;
         public bool allowwolfram = false;
+        public bool allowvariables = false;
         public PlotForm plotter;
         public Dictionary<string, string> savedVariables;
         
@@ -69,7 +71,7 @@ namespace Calculator
 
         private void PreProcess(ref string str)
         {
-            str = str.ToUpper();
+            str = str.ToUpper().Trim() ;
             str = str.Replace("PI", Convert.ToString(Math.PI));
             //str = str.Replace("E", Convert.ToString(Math.E));
 
@@ -520,7 +522,7 @@ namespace Calculator
                 }
                 if (Properties.Settings.Default.WA_RespSend >= Properties.Settings.Default.WA_RespLimit)
                 {
-                    MessageBox.Show("Превышен месячный лимит запросов. Увеличте лимит в настройках или плачьте.", "Превышен лимит запросов", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    MessageBox.Show("Превышен месячный лимит запросов. Увеличить лимит или отключить контроль можно в настройках.", "Превышен лимит запросов", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     return;
                 }
 
@@ -537,6 +539,33 @@ namespace Calculator
                 {
                     buttonDigit_Click(sender, e);
                 }
+                else if(inpstr.StartsWith("set") )
+                {
+                    if(inpstr.Contains("="))
+                    {
+                        KeyValuePair<string, string> parsedres = new KeyValuePair<string,string>();
+                        if (parseVariable(inpstr, ref parsedres))
+                        {
+                            if (savedVariables == null) savedVariables = new Dictionary<string, string>();
+                            if (savedVariables.Keys.Contains(parsedres.Key))
+                            {
+                                if(DialogResult.No == MessageBox.Show("Переменная с таким именем уже существует. Перезаписать?","Замена", MessageBoxButtons.YesNo,MessageBoxIcon.Question))
+                                {
+                                    return;
+                                }
+                            }
+
+                            ScreenBox.Clear();
+                            List<Token> RPN1 = Arithmetic.GetRPN(parsedres.Value, savedVariables);
+                            string result = savedVariables[parsedres.Key] = PostProcess(Arithmetic.Calculate(ref RPN1, gradusmode));
+                            if (RPN1 != null) RPN1.Clear();
+                            savedVariables[parsedres.Key] = result;
+                            if (HistoryBox1.Text == "") HistoryBox1.Text += parsedres.Key + "=" + result + ((parsedres.Value == result) ? "" : " [" + parsedres.Value + "]");
+                            else HistoryBox1.Text += "\r\n" + parsedres.Key + "=" + result + ((parsedres.Value == result) ? "" : " [" + parsedres.Value + "]");
+                        }
+                    }
+                    else buttonDigit_Click(sender, e);
+                }
                 else
                 {
                     string heststr = inpstr;
@@ -549,7 +578,11 @@ namespace Calculator
                         case "engen":
                         default:
                             //Вычисление на обычной или инженерной панели
-                            List<Token> RPN1 = Arithmetic.GetRPN(inpstr);
+                            //List<Token> RPN1 = Arithmetic.GetRPN(inpstr);
+                            //result = Convert.ToString(Arithmetic.Calculate(ref RPN1, gradusmode));
+                            //result = PostProcess(Convert.ToDouble(result));
+                            //if (RPN1 != null) RPN1.Clear();
+                            List<Token> RPN1 = Arithmetic.GetRPN(inpstr, savedVariables);
                             result = Convert.ToString(Arithmetic.Calculate(ref RPN1, gradusmode));
                             result = PostProcess(Convert.ToDouble(result));
                             if (RPN1 != null) RPN1.Clear();
@@ -595,6 +628,30 @@ namespace Calculator
                     else HistoryBox1.Text += "\r\n" + heststr;
                 }
             }
+        }
+
+        private bool parseVariable(string input, ref KeyValuePair<string, string> output)
+        {
+            input = input.ToUpper().Trim();
+            string[] mas = input.Split('=');
+            if (mas.Length != 2) return false;
+            if (!mas[0].StartsWith("SET")) return false;
+            mas[0] = mas[0].Substring(3).Trim();
+            if (checkReserved(mas[0])) return false;
+            foreach (char c in mas[0]) if (!Char.IsLetter(c)) return false;
+
+            mas[1] = mas[1].Trim();
+
+            output = new KeyValuePair<string, string>(mas[0], mas[1]);
+            return true;
+        }
+
+        private bool checkReserved(string input)
+        {
+            string[] reserverwords = { "SQRT", "QBRT", "XQRT", "ASIN", "SINH", "SIN", "ACOS", "COSH", "COS", "ATG", "TGH", "TG", "ACTG", "CTGH", "CTG", "LN", "LG", "LOG", "EXP", "ABS", "SET" };
+            input = input.ToUpper().Trim();
+            foreach (string item in reserverwords) if (input == item) return true;
+            return false;
         }
 
         // Альтернативный вид кнопок
@@ -958,6 +1015,19 @@ namespace Calculator
                 buttonDigit_Click(tbtn, e);
             }
             ScreenBox.Focus();
+        }
+
+        private void toolStripVarSwitch_CheckStateChanged(object sender, EventArgs e)
+        {
+            if (toolStripVarSwitch.Checked)
+            {
+                allowvariables  = true;
+            }
+            else
+            {
+                allowwolfram = false;
+            }
+            checkBoxMode_CheckedChanged(sender, e);
         }
     }
 }

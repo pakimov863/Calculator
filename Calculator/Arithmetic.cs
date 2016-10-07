@@ -22,93 +22,6 @@ namespace Calculator
             List<Token> RPN = Arithmetic.GetRPN(expression);
             return Arithmetic.Calculate(ref RPN, deg);
         }
-      
-        /*/// <summary>
-        /// Создание обратной польской записи для выражения
-        /// </summary>
-        /// <param name="expression">Математическое выражение</param>
-        /// <returns>Список токенов в виде обратной польской записи</returns>
-        public static List<Token> GetRPN2(string expression)
-        {
-            MatchCollection collection = Regex.Matches(expression, @"\(|\)|[0-9]|\,|\+|\-|\*|\/|\^|⋮|⋯|⋰|⋱|SQRT|QBRT|XQRT|ASIN|SINH|SIN|ACOS|COSH|COS|ATG|TGH|TG|ACTG|CTGH|CTG|LN|LG|LOG|EXP|\!");
-
-            Regex variables = new Regex(@"[0-9]|\,");
-            Regex operations = new Regex(@"\+|\-|\*|\/|\^|⋮|⋯|⋰|⋱|SQRT|QBRT|XQRT|ASIN|SINH|SIN|ACOS|COSH|COS|ATG|TGH|TG|ACTG|CTGH|CTG|LN|LG|LOG|EXP|\!");
-            Regex brackets = new Regex(@"\(|\)");
-            string[] priority = { "SQRT", "QBRT", "XQRT", "ASIN", "SINH", "SIN", "ACOS", "COSH", "COS", "ATG", "TGH", "TG", "ACTG", "CTGH", "CTG", "LN", "LG", "LOG", "EXP", "!", "^", "⋰", "⋱", "⋯", "⋮", "*", "/", "-", "+", "±" };//⋮=+%, ⋯=-%, ⋰=*%, ⋱=/%
-
-            Stack<string> stack = new Stack<string>();
-            List<Token> list = new List<Token>();
-
-
-            bool fl = false;
-            string t_str="";//1,0,5 -> 105
-
-            foreach (Match match in collection)
-            {
-                Match temp = variables.Match(match.Value);
-                if (temp.Success)
-                {
-                    if (fl)
-                    { //уже сохранялось число
-                        t_str += temp.Value;
-                    }
-                    else
-                    { //еще не сохранялось
-                        t_str = temp.Value;
-                        fl = true;
-                    }
-                    continue;
-                }
-                else
-                {
-                    if (fl)
-                    {
-                        list.Add(new Token(t_str, TokenType.Variable));
-                        t_str = "";
-                        fl = false;
-                    }
-                }
-                
-                temp = brackets.Match(match.Value);
-                if (temp.Success)
-                {
-                    if (temp.Value == "(") { stack.Push(temp.Value); continue; }
-                    string operation = stack.Pop();
-                    while (operation != "(")
-                    {
-                        list.Add(new Token(operation, TokenType.Operation));
-                        operation = stack.Pop();
-                    }
-                    continue;
-                }
-
-                temp = operations.Match(match.Value);
-                if (temp.Success)
-                {
-                    if (stack.Count != 0)
-                        while (Array.IndexOf(priority, temp.Value) > Array.IndexOf(priority, stack.Peek()))
-                        {
-                            if (stack.Peek() == "(") break;
-                            list.Add(new Token(stack.Pop(), TokenType.Operation));
-                            if (stack.Count == 0) break;
-                        }
-                    stack.Push(temp.Value);
-                }
-            }
-
-            if (fl)
-            {
-                list.Add(new Token(t_str, TokenType.Variable));
-                t_str = "";
-                fl = false;
-            }
-
-            while (stack.Count != 0)
-                list.Add(new Token(stack.Pop(), TokenType.Operation));
-
-            return list;
-        }*/
 
         /// <summary>
         /// Создание обратной польской записи для выражения
@@ -117,8 +30,8 @@ namespace Calculator
         /// <returns>Список токенов в виде обратной польской записи</returns>
         public static List<Token> GetRPN(string expression)
         {
-            MatchCollection collection = Regex.Matches(expression, @"\(|\)|(\d+(((\.|,)\d+|)+e(\+|-)\d+|(\.|,)\d+|))|\+|\-|_|\*|\/|\^|⋮|⋯|⋰|⋱|SQRT|QBRT|XQRT|ASIN|SINH|SIN|ACOS|COSH|COS|ATG|TGH|TG|ACTG|CTGH|CTG|LN|LG|LOG|EXP|\!|ABS|·");
-            Regex variables = new Regex(@"\d+(((\.|,)\d+|)+e(\+|-)\d+|(\.|,)\d+|)");
+            MatchCollection collection = Regex.Matches(expression, @"\(|\)|(\d+(((\.|,)\d+|)+E(\+|-)\d+|(\.|,)\d+|))|\+|\-|_|\*|\/|\^|⋮|⋯|⋰|⋱|SQRT|QBRT|XQRT|ASIN|SINH|SIN|ACOS|COSH|COS|ATG|TGH|TG|ACTG|CTGH|CTG|LN|LG|LOG|EXP|\!|ABS|·");
+            Regex variables = new Regex(@"\d+(((\.|,)\d+|)+E(\+|-)\d+|(\.|,)\d+|)");
             //(\-?\d+(\.\d{0,})?)
             Regex operations = new Regex(@"\+|\-|_|\*|\/|\^|⋮|⋯|⋰|⋱|SQRT|QBRT|XQRT|ASIN|SINH|SIN|ACOS|COSH|COS|ATG|TGH|TG|ACTG|CTGH|CTG|LN|LG|LOG|EXP|\!|ABS|·");
             Regex brackets = new Regex(@"\(|\)");
@@ -135,6 +48,115 @@ namespace Calculator
                 {
                     operleft = false;
                     list.Add(new Token(temp.Value, TokenType.Variable));
+                    continue;
+                }
+
+                temp = brackets.Match(match.Value);
+                if (temp.Success)
+                {
+                    //stack isEmpty() ?
+                    operleft = true;
+                    if (temp.Value == "(") { stack.Push(temp.Value); continue; }
+                    string operation = stack.Pop();
+                    while (operation != "(")
+                    {
+                        list.Add(new Token(operation, TokenType.Operation));
+                        operation = stack.Pop();
+                    }
+                    continue;
+                }
+
+                temp = operations.Match(match.Value);
+                if (temp.Success)
+                {
+                    string tempValue = temp.Value;
+                    if (operleft && tempValue == "-") { list.Add(new Token("-1", TokenType.Variable)); tempValue = "·"; }
+                    operleft = true;
+
+                    if (stack.Count != 0)
+                    {
+                        //while (Array.IndexOf(priority, tempValue) >= Array.IndexOf(priority, stack.Peek()))
+                        while (GetPriority(tempValue) >= GetPriority(stack.Peek()))
+                        {
+                            if (stack.Peek() == "(") break;
+                            list.Add(new Token(stack.Pop(), TokenType.Operation));
+                            if (stack.Count == 0) break;
+                        }
+                    }
+                    stack.Push(tempValue);
+                }
+            }
+
+            while (stack.Count != 0)
+            {
+                //проверка | new ?
+                list.Add(new Token(stack.Pop(), TokenType.Operation));
+            }
+
+            return list;
+        }
+
+        public static Double CalcToResult(string expression, Dictionary<string, string> uservars, byte deg = 1)
+        {
+            List<Token> RPN = Arithmetic.GetRPN(expression, uservars);
+            return Arithmetic.Calculate(ref RPN, deg);
+        }
+
+        private static int CompareStringsByLength(string x, string y)
+        {
+            if (x == null)
+            {
+                if (y == null) return 0;
+                else return -1;
+            }
+            else
+            {
+                if (y == null) return 1;
+                else
+                {
+                    int retval = x.Length.CompareTo(y.Length);
+
+                    if (retval != 0) return -retval;
+                    else return x.CompareTo(y);
+                }
+            }
+        }
+
+        public static List<Token> GetRPN(string expression, Dictionary<string, string> uservars)
+        {
+            List<string> tmp = new List<string>();
+            foreach (string item in uservars.Keys) tmp.Add(item);
+            tmp.Sort(CompareStringsByLength);
+            string regex_collection = @"\(|\)|(\d+(((\.|,)\d+|)+E(\+|-)\d+|(\.|,)\d+|))|\+|\-|_|\*|\/|\^|⋮|⋯|⋰|⋱|SQRT|QBRT|XQRT|ASIN|SINH|SIN|ACOS|COSH|COS|ATG|TGH|TG|ACTG|CTGH|CTG|LN|LG|LOG|EXP|\!|ABS|·";
+            string regex_variables = @"(\d+(((\.|,)\d+|)+E(\+|-)\d+|(\.|,)\d+|))";
+            foreach (string item in tmp)
+            {
+                regex_collection += "|" + item.Trim().ToUpper();
+                regex_variables += "|" + item.Trim().ToUpper();
+            }
+
+            MatchCollection collection = Regex.Matches(expression, regex_collection);
+            Regex variables = new Regex(regex_variables);
+            Regex operations = new Regex(@"\+|\-|_|\*|\/|\^|⋮|⋯|⋰|⋱|SQRT|QBRT|XQRT|ASIN|SINH|SIN|ACOS|COSH|COS|ATG|TGH|TG|ACTG|CTGH|CTG|LN|LG|LOG|EXP|\!|ABS|·");
+            Regex brackets = new Regex(@"\(|\)");
+
+            Stack<string> stack = new Stack<string>();
+            List<Token> list = new List<Token>();
+            bool operleft = true;
+
+            foreach (Match match in collection)
+            {
+                Match temp = variables.Match(match.Value);
+                if (temp.Success)
+                {
+                    operleft = false;
+                    double res;
+                    if (Double.TryParse(temp.Value, out res))
+                        list.Add(new Token(temp.Value, TokenType.Variable));
+                    else
+                        if (uservars.ContainsKey(temp.Value)) list.Add(new Token(uservars[temp.Value], TokenType.Variable));
+                        else return null;
+                    continue;
                 }
 
                 temp = brackets.Match(match.Value);
@@ -187,7 +209,6 @@ namespace Calculator
         /// </summary>
         /// <param name="rpn">Польская запись выражения</param>
         /// <param name="deg">Режим меры угла: deg=0, [rad=1], grad=2</param>
-        /// <param name="hasError">Показывает, была ли ошибка вычислений</param>
         /// <returns>Результат вычислений</returns>
         public static Double Calculate(ref List<Token> rpn, byte deg)
         {
